@@ -77,5 +77,3 @@ echo -e "source /etc/profile.d/weston.sh" >> /root/.bashrc
 
 # clear the patches
 rm -rf var/cache/apt/archives/*
-
-ldconfig

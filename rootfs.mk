@@ -11,11 +11,17 @@ clean:
 	rm -rf output/$(ROOTFS_PACK)
 distclean: clean
 
-build-rootfs:
+build-rootfs: src
 	@echo "build rootfs..."
 	./gen_rootfs.sh
 	@mv $(ROOTFS_PACK) output/$(ROOTFS_PACK)
+	@rm -rf rootfs
 
 build: build-rootfs
+
+src:
+	if [ ! -f output ] ; then \
+		mkdir -p output; \
+	fi
 
 .PHONY: build-rootfs build

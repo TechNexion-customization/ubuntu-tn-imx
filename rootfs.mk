@@ -15,7 +15,6 @@ build-rootfs: src
 	@echo "build rootfs..."
 	./gen_rootfs.sh
 	@mv $(ROOTFS_PACK) output/$(ROOTFS_PACK)
-	@rm -rf rootfs
 
 build: build-rootfs
 

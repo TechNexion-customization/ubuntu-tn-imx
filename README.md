@@ -17,6 +17,9 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Build a runtime Image
     * Flash the image to the target board
 * [Quick-Start (for user)](#Quick-Start)
+    * Run the apps using console prompt
+    * Control WiFi connection using `nmcli`
+    * Expand rootfs partition
 * [Apps-Developing](#Apps-Developing)
 * [Known-Issues](#Known-issues)
 
@@ -59,7 +62,7 @@ Download source code:
 
     $ git clone https://github.com/TechNexion-customization/ubuntu-tn-imx8.git
 
-#### Compiling Environment Setup
+#### Compiling environment setup
 
 General Packages Installation (Ubuntu 18.04 or above)
 
@@ -73,4 +76,67 @@ General Packages Installation (Ubuntu 18.04 or above)
     sshpass ssh-askpass zip xz-utils kpartx vim screen \
     debootstrap qemu-system-arm qemu-user-static gcc-aarch64-linux-gnu
 
+#### Build a runtime Image
+
+
+Lazy way, make a runtime image directly:
+Note that this BSP does support PICO-IMX8MM with PI only at this moment.
+
+    $ make all
+    (it will download the latest u-boot, kernel and rootfs and compile them automatically)
+
+You also can compile the source code separatically:
+
+    $ make u-boot (download and compile the latest u-boot only)
+    $ make kernel (download and compile the latest kernel only)
+    $ make rootfs (download and compile the latest rootfs only)
+    $ make image (package runtime image only, depend on above three items done)
+    
+#### Flash the image to the target board
+
+Output relative image files of path:
+
+    $ ls output
+    kernel  rootfs.tgz  u-boot  ubuntu.img
+
+We provide two ways for image flashing:
+
+**1. `uuu` way**
+
+It's a modular flash tool base on serial download mode, download the tools from technexion website as following link:
+
+Download: [prebuilt binary](ftp://ftp.technexion.net/development_resources/development_tools/installer/imx-mfg-uuu-tool_20200327.zip)
+
+Step 1. Connect a Type-C cable between host PC and the board
+
+Step 2. Change the boot mode from eMMC mode to serial download mode
+
+Step 3. Issue uuu command to flash the compiled Ubuntu image to eMMC:
+
+    $ sudo uuu/linux64/uuu -b emmc_img imx8mm/pico-imx8mm-flash.bin ubuntu.img
+
+Step 4. Change back boot mode from serial download mode to eMMC mode, it should be works!
+
+For Windows OS or want to know the detail users , please click this [link](https://github.com/TechNexion/u-boot-edm/wiki/Use-mfgtool-%22uuu%22-to-flash-eMMC)
+
+**2. `ums` way**
+
+It's a easy way base on u-boot prompt of eMMC boot mode, but the disadvantage is the speed is a little bit lower than `uuu` way, another limitation is it must be existed a works u-boot inside the eMMC, if not, you still need adapt `uuu` way at first.
+
+Step 1. Keep eMMC boot mode
+
+Step 2. Connect a Type-C cable between host PC and the board for image flashing
+
+Step 3. Connect a micro-usb cable between host PC and the board for debeg cosole
+
+Step 4. press enter key on debug console when boot up u-boot, let u-boot into prompt
+
+Step 5. Target board side: Issue ums command to mount eMMC as a mass storage:
+
+    # ums 0 mmc 2
+
+Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
+
+    $ sudo dd if=ubuntu.img of=/dev/sdx bs=1M (sdx means the device node which ums mounted storage)
+    $ sync
 

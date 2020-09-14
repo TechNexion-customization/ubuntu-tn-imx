@@ -17,8 +17,12 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Build a runtime Image
     * Flash the image to the target board
 * [Quick-Start (for user)](#Quick-Start)
-    * Run the apps using console prompt
+    * Run the apps using debug console/ssh
+    * Playback video
+    * `glmark` for GPU testing
+    * Run QT5 applications
     * Control WiFi connection using `nmcli`
+    * Docker conatiner
     * Expand rootfs partition
 * [Apps-Developing](#Apps-Developing)
 * [Known-Issues](#Known-issues)
@@ -92,6 +96,10 @@ You also can compile the source code separatically:
     $ make rootfs (download and compile the latest rootfs only)
     $ make image (package runtime image only, depend on above three items done)
     
+Remove all compiled objects and image:
+
+    $ make clean
+   
 #### Flash the image to the target board
 
 Output relative image files of path:
@@ -140,3 +148,88 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
     $ sudo dd if=ubuntu.img of=/dev/sdx bs=1M (sdx means the device node which ums mounted storage)
     $ sync
 
+**QCA9377:** If you want to enable  QCA9377 WiFi/Bluetooth functions, please copy relate firmware files to specific path of rootfs partition as following:
+
+    WiFi:
+    $ sudo cp -a <firmware path>/qca9377/bdwlan30.bin mnt/lib/firmware/qca9377/
+    $ sudo cp -a <firmware path>/qca9377/otp30.bin mnt/lib/firmware/qca9377/
+    $ sudo cp -a <firmware path>/qca9377/qwlan30.bin mnt/lib/firmware/qca9377/
+    $ sudo cp -a <firmware path>/qca9377/utf30.bin mnt/lib/firmware/qca9377/
+    $ sudo cp -a <firmware path>/wlan/cfg.dat mnt/lib/firmware/wlan/cfg.dat
+    $ sudo cp -a <firmware path>/wlan/qca9377/qcom_cfg.ini mnt/lib/firmware/wlan/qca9377/qcom_cfg.ini
+    
+    Bluetooth:
+    $ sudo cp -a <firmware path>/qca/nvm_tlv_3.2.bin mnt/lib/firmware/qca/nvm_tlv_3.2.bin
+    $ sudo cp -a <firmware path>/qca/rampatch_tlv_3.2.tlv mnt/lib/firmware/qca/rampatch_tlv_3.2.tlv
+    
+    Please contact sales@technexion.com to get firmware files.
+
+### Quick-Start
+-----------
+
+#### Run the apps using debug console/ssh
+
+Because the Weston desktop is running on root permission by default setting, so you must be login as **root user** if you want to execute Wayland base application, or you will face the permission issue.
+
+If you login as **ubuntu user**, you only can ruuning Walyand unnecessary applications
+
+
+#### Playback video
+
+Adapt gstreamer-1.0 which supports avi, mp4, mkv and webm format files, please change to root user and issue quick command to play video:
+
+    # gplay-1.0 /home/ubuntu/mnt/test.mp4
+    
+    You should be see a resolution problem because ILI9881C is a portrait screen, please issue standard command to playback on fullscreen mode:
+    
+    # gst-launch-1.0 playbin uri=file:///home/ubuntu/mnt/test.mp4 video-sink="glimagesink render-rectangle=<1,1,1280,720>"
+    
+    Of course if your panel is base on landscape screen such as HDMI, you can use gplay directly.
+
+
+#### `glmark` for GPU benchmark testing
+
+    # glmark2-es2-wayland
+
+
+#### Run QT5 applications
+
+We support libQT5 relate libraries, you can develop your apps using QT-Creator, and running on Ubuntu directly, or copy executable QT apps from Technexion Yocto 3.0, it also works.
+
+    Example:
+    # root@technexion:/home/ubuntu/QtDemo# ./QtDemo 
+    Using Wayland-EGL
+    Using the 'xdg-shell' shell integration
+
+
+#### Control WiFi connection using `nmcli`
+
+Ubuntu adapt network-manager service to manage network status, so please use `nmcli` to change the configuration if you need:
+
+    Example: WiFi Station mode 
+    1. Scan exist WiFi hotspots
+    $ nmcli device wifi list
+    2. Make a connection
+    $ nmcli device wifi connect SSID-Name password wireless-password
+    
+
+#### Docker conatiner
+
+For OS virtualization requirement, we enable docker engine in Ubuntu, the users can use docker commands to pull exist containers from dockerhub, of course it can build in Ubuntu using dockerfile, note that you have to choose aarch64 strcuture base container.
+
+
+#### Expand rootfs partition
+
+Step 1. Please create a ums connection as `Flash the image to the target board` section.
+
+Step 2. After mounted eMMC as mass storage, use `gparted` on host PC side:
+
+    $ sudo gparted /dev/sdx <sdx means the device node which ums mounted storage>
+
+Step 3. Because `gparted` is a GUI base app, you can resize the rootfs partition using drag way
+
+Step 4. Click tick mark after resized, done!
+
+
+### Apps-Developing
+-----------

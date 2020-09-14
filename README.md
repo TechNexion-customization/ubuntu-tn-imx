@@ -208,9 +208,16 @@ Ubuntu adapt network-manager service to manage network status, so please use `nm
 
     Example: WiFi Station mode 
     1. Scan exist WiFi hotspots
-    $ nmcli device wifi list
+    $ sudo nmcli device wifi list
     2. Make a connection
-    $ nmcli device wifi connect SSID-Name password wireless-password
+    $ sudo nmcli device wifi connect SSID-Name password wireless-password
+    
+    Example: WiFi AP mode
+    $ sudo nmcli con add type wifi ifname wlan0 con-name Hostspot autoconnect yes ssid Hostspot
+    $ sudo nmcli con modify Hostspot 802-11-wireless.mode ap 802-11-wireless.band a ipv4.method shared
+    $ sudo nmcli con modify Hostspot wifi-sec.key-mgmt wpa-psk
+    $ sudo nmcli con modify Hostspot wifi-sec.psk "veryveryhardpassword1234"
+    $ sudo nmcli con up Hostspot
     
 
 #### Docker conatiner

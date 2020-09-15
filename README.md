@@ -71,6 +71,7 @@ Download source code:
 
 General Packages Installation (Ubuntu 18.04 or above)
 
+    Install necessary packages
     $ sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
     chrpath socat cpio python python3 python3-pip python3-pexpect \
     xz-utils debianutils iputils-ping libsdl1.2-dev xterm \
@@ -78,8 +79,12 @@ General Packages Installation (Ubuntu 18.04 or above)
     python-pysqlite2 help2man desktop-file-utils \
     libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \
     groff curl lzop asciidoc u-boot-tools libreoffice-writer \
-    sshpass ssh-askpass zip xz-utils kpartx vim screen \
-    debootstrap qemu-system-arm qemu-user-static gcc-aarch64-linux-gnu
+    sshpass ssh-askpass zip xz-utils kpartx vim screen bison flex \
+    debootstrap qemu-system-arm qemu-user-static libssl-dev
+
+    Install cross-compiler
+    $ sudo apt-get install gcc-aarch64-linux-gnu 
+
 
 ****
 #### Build a runtime Image
@@ -253,3 +258,5 @@ Step 4. Click tick mark after resized, done!
 -----------
 
 1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via ap-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
+
+2. This Ubuntu is base on Wayland graphic protocol, so Xorg base app/librareis will be execute invalided, don't spend time to install Xorg relate programs.

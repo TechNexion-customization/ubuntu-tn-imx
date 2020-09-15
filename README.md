@@ -25,7 +25,7 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Docker conatiner
     * Expand rootfs partition
 * [Apps-Developing](#Apps-Developing)
-* [Known-Issues](#Known-issues)
+* [Known-Limitations](#Known-issues)
 
 ****
 ### Overview
@@ -51,6 +51,7 @@ Features:
 * openGL with GPU accelelation
 * docker container v19.03.8
 
+****
 ### Build-Image
 -----------
 
@@ -80,6 +81,7 @@ General Packages Installation (Ubuntu 18.04 or above)
     sshpass ssh-askpass zip xz-utils kpartx vim screen \
     debootstrap qemu-system-arm qemu-user-static gcc-aarch64-linux-gnu
 
+****
 #### Build a runtime Image
 
 
@@ -164,6 +166,7 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
     
     Please contact sales@technexion.com to get firmware files.
 
+****
 ### Quick-Start
 -----------
 
@@ -237,6 +240,16 @@ Step 3. Because `gparted` is a GUI base app, you can resize the rootfs partition
 
 Step 4. Click tick mark after resized, done!
 
-
+****
 ### Apps-Developing
 -----------
+
+* toolchain (coming soon)
+* Graphic/QT5 Development SDK (coming soon)
+
+
+****
+### Known-Limitations
+-----------
+
+1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via ap-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.

@@ -3,10 +3,10 @@ Technexion Ubuntu 20.04 LTS Image Builder
 
 ## Support Hardware
 --------
-|Hardware|Baseboard|
+|System-On-Module|Baseboard|
 |---|---|
 |PICO-IMX8M-MINI|PI<br>WIZARD (WIP)|
-|EDM-G-IMX8M-PLUS|(WIP)|
+|EDM-G-IMX8M-PLUS|EVK(WIP)|
 
 ****
 ## Contents
@@ -249,14 +249,48 @@ Step 4. Click tick mark after resized, done!
 ### Apps-Developing
 -----------
 
-* toolchain (coming soon)
-* Graphic/QT5 Development SDK (coming soon)
+**Toolchain**
+
+**1. Non-GUI/Web GUI applications**
+
+Example: IoT, Industrial or Machine Learning
+
+|#|Language|libraries|
+|---|---|----
+|1|JAVA|apt-get install openjdk11-jdk
+|2|Python|apt-get install python-pip3
+|2|JavaScript|apt-get install nodejs npm
+|2|Golang|apt-get install golang
+|2|C/C++|apt-get install gcc
+
+The users also can compile the program on host PC side using cross-compiler if adapt non-OO programming language.
+
+**2. GUI applications with HW acceleration **
+
+Example: QT5, Wayland
+
+|#|Language|libraries|
+|---|---|----
+|1|C++|QT5
+|2|C|Wayland
+
+Wayland example:
+
+    $ git clone https://gitlab.com/hdante/hello_wayland.git
+    $ sudo apt-get install make libwayland-dev
+    $ cd hello_wayland
+    $ make
+    $ ./hello_wayland
+
+QT example (coming soon)
+
+We recommended developing GUI applications on host PC side, it's saving eMMC usage for develop libraries especially huge HMI system, so Technexion will provide a Graphic SDK for host PC side use soon.
 
 
 ****
 ### Known-Limitations
 -----------
 
-1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via ap-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
+1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
 
 2. This Ubuntu is base on Wayland graphic protocol, so Xorg base app/librareis will be execute invalided, don't spend time to install Xorg relate programs.

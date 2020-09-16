@@ -265,7 +265,7 @@ Example: IoT, Industrial or Machine Learning
 
 The users also can compile the program on host PC side using cross-compiler if adapt non-OO programming language.
 
-**2. GUI applications with HW acceleration **
+**2. GUI applications with HW acceleration**
 
 Example: QT5, Wayland
 

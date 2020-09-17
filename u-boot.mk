@@ -24,7 +24,7 @@ build: src
 	@sed -i 's/imx8mm-pico-pi.dtb/imx8mm-pico-pi-ili9881c.dtb/' $(UBOOT_DIR)/u-boot-tn-imx/configs/pico-imx8mm_defconfig
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx $(UBOOT_DEFCONFIG)
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx -j$(CPUS) all
-	cd $(UBOOT_DIR)/u-boot-tn-imx; ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- ./install_uboot_imx8.sh -b imx8mm-pico-pi -d /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- ./install_uboot_imx8.sh -b imx8mm-pico-pi -d /dev/null > /dev/null; cd -
 
 src:
 	mkdir -p $(UBOOT_DIR)

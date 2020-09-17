@@ -1,0 +1,16 @@
+*****************************************************
+* Author: Technexion                                *
+*                                                   *
+* Date: 2020/09/17                                  *
+*                                                   *
+* Title: Ubuntu 20.04 LTS runtime image             *
+*                                                   *
+*****************************************************
+
+# Github SDK:
+https://github.com/TechNexion-customization/ubuntu-tn-imx8
+
+# Flash the image:
+https://github.com/TechNexion-customization/ubuntu-tn-imx8#flash-the-image-to-the-target-board
+
+# Revision detail:

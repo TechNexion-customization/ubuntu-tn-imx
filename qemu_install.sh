@@ -67,8 +67,8 @@ yes "Y" | apt install libofa0 libsrtp2-1 libdv4 libkate1 libwebrtc-audio-process
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
 
-echo "${COL_GREEN}Add swap partition...Default size is 256MB${COL_NORMAL}"
-dd if=/dev/zero of=/swapfile bs=1M count=256
+echo "${COL_GREEN}Add swap partition...Default size is 128MB${COL_NORMAL}"
+dd if=/dev/zero of=/swapfile bs=1M count=128
 chmod 600 /swapfile
 mkswap /swapfile
 

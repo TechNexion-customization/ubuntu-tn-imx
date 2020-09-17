@@ -6,7 +6,7 @@ TOP=${PWD}
 gen_pure_rootfs() {
 
   if [ ! -d rootfs_overlay ] ; then
-    wget -c -t 0 --timeout=60 --waitretry=60 https://github.com/technexion-android/android_restricted_extra/raw/master/imx8-focol-proprietary.tar.gz
+    wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/imx8-focol-proprietary.tar.gz
     tar zxvf imx8-focol-proprietary.tar.gz
     rm ./imx8-focol-proprietary.tar.gz
   fi

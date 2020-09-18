@@ -258,7 +258,7 @@ Example: IoT, Industrial or Machine Learning
 |#|Language|libraries|
 |---|---|----
 |1|JAVA|apt-get install openjdk11-jdk
-|2|Python|apt-get install python-pip3
+|2|Python|apt-get install python3-pip
 |2|JavaScript|apt-get install nodejs npm
 |2|Golang|apt-get install golang
 |2|C/C++|apt-get install gcc

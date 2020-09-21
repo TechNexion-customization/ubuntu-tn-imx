@@ -24,6 +24,7 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Control WiFi connection using `nmcli`
     * Docker conatiner
     * Expand rootfs partition
+    * Weston Keyboard shortcuts
 * [Apps-Developing](#Apps-Developing)
 * [Known-Limitations](#Known-issues)
 
@@ -244,6 +245,16 @@ Step 2. After mounted eMMC as mass storage, use `gparted` on host PC side:
 Step 3. Because `gparted` is a GUI base app, you can resize the rootfs partition using drag way
 
 Step 4. Click tick mark after resized, done!
+
+
+#### Weston Keyboard shortcuts
+
+|#|shortcut set|function|
+|---|---|----
+|1|super + s|make a screenshot of the desktop
+|2|super + r|record start/stop a video of the desktop
+|3|super + Tab|swich active windows
+
 
 ****
 ### Apps-Developing

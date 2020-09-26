@@ -27,7 +27,7 @@ END
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools bluez ppp ntp ntpdate bridge-utils can-utils v4l-utils 
-yes "Y" | apt install bash-completion docker.io network-manager ifupdown
+yes "Y" | apt install bash-completion docker.io network-manager ifupdown resolvconf
 
 # apt-get source adding
 cat <<END > /etc/network/interfaces
@@ -38,7 +38,7 @@ auto lo
 iface lo inet loopback
 
 # The primary network interface
-auto eth0
+allow-hotplug eth0
 iface eth0 inet dhcp
 END
 
@@ -66,6 +66,10 @@ yes "Y" | apt install libofa0 libsrtp2-1 libdv4 libkate1 libwebrtc-audio-process
 
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
+
+# let network-manager handle all network interfaces
+touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
+sed -i 's/managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
 
 echo "${COL_GREEN}Add swap partition...Default size is 128MB${COL_NORMAL}"
 dd if=/dev/zero of=/swapfile bs=1M count=128

@@ -71,6 +71,9 @@ sudo systemctl enable rc-local.service
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf
 sed -i 's/managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
 
+# disable type password everytime using ubuntu user
+sed -i 's/sudo\tALL=(ALL:ALL) ALL/sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
+
 echo "${COL_GREEN}Add swap partition...Default size is 128MB${COL_NORMAL}"
 dd if=/dev/zero of=/swapfile bs=1M count=128
 chmod 600 /swapfile

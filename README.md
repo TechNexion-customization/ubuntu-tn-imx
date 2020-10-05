@@ -25,6 +25,8 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Docker conatiner
     * Expand rootfs partition
     * Weston Keyboard shortcuts
+    * Chromium
+
 * [Apps-Developing](#Apps-Developing)
 * [Known-Limitations](#Known-issues)
 
@@ -43,7 +45,7 @@ We recommended adapt ubuntu user as normal use, and adapt root user to do deveop
 
 Features:
 * LTS version until 2025/04
-* Weston Desktop with GPU accelelation v1.18
+* Weston Desktop with GPU accelelation v6.0
 * Wayland compositor v1.18.0
 * gstreamer1.0 v1.16.2
 * VPU libraries v1.18
@@ -254,6 +256,16 @@ Step 4. Click tick mark after resized, done!
 |1|super + s|make a screenshot of the desktop
 |2|super + r|record start/stop a video of the desktop
 |3|super + Tab|swich active windows
+
+
+#### Chromium
+
+|#|method|command|
+|---|---|----
+|1| click icon| no need, icon is exist on left top side of weston desktop
+|2| basic browser| # chromium --no-sandbox --test-type
+|3| kiosk mode (full screen)| # chromium --no-sandbox --test-type --start-fullscreen www.technexion.com
+
 
 
 ****

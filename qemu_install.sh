@@ -27,9 +27,9 @@ END
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools bluez ppp ntp ntpdate bridge-utils can-utils v4l-utils 
-yes "Y" | apt install bash-completion docker.io network-manager ifupdown resolvconf
+yes "Y" | apt install bash-completion docker.io network-manager ifupdown resolvconf alsa-utils
 
-# apt-get source adding
+# network configuration
 cat <<END > /etc/network/interfaces
 source /etc/network/interfaces.d/*
 
@@ -40,6 +40,21 @@ iface lo inet loopback
 # The primary network interface
 allow-hotplug eth0
 iface eth0 inet dhcp
+END
+
+# audio setting
+cat <<END > /root/.asoundrc
+pcm.!default {
+  type plug
+  slave {
+    pcm "hw:0,0"
+  }
+}
+
+ctl.!default {
+  type hw
+  card 0
+}
 END
 
 # weston
@@ -84,3 +99,4 @@ echo -e "source /etc/profile.d/weston.sh" >> /root/.bashrc
 
 # clear the patches
 rm -rf var/cache/apt/archives/*
+sync

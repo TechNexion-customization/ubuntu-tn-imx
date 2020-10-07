@@ -242,15 +242,11 @@ For OS virtualization requirement, we enable docker engine in Ubuntu, the users 
 
 #### Expand rootfs partition
 
-Step 1. Please create a ums connection as `Flash the image to the target board` section.
+After flash the ubuntu image to eMMC, you'll see a pop-up window at first boot as following figure:
 
-Step 2. After mounted eMMC as mass storage, use `gparted` on host PC side:
+![expand_rootfs](figures/expand_rootfs.png)
 
-    $ sudo gparted /dev/sdx <sdx means the device node which ums mounted storage>
-
-Step 3. Because `gparted` is a GUI base app, you can resize the rootfs partition using drag way
-
-Step 4. Click tick mark after resized, done!
+The system will starting expand rootfs partition and wait for about 10 seconds, it will auto reboot and you can start enjoy your Ubuntu. 
 
 
 #### Weston Keyboard shortcuts

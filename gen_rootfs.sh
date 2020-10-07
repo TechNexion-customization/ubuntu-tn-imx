@@ -29,16 +29,21 @@ gen_pure_rootfs() {
   sudo cp -a ${TOP}/rootfs_overlay/usr/lib/weston ${TOP}/rootfs/usr/lib/
   sudo cp -a ${TOP}/rootfs_overlay/usr/include/* ${TOP}/rootfs/usr/include/
   sudo cp -a ${TOP}/rootfs_overlay/usr/share/* ${TOP}/rootfs/usr/share/
+  sudo cp -a ${TOP}/rootfs_overlay/usr/libexec/* ${TOP}/rootfs/usr/libexec/
 
   sudo cp -a ${TOP}/rootfs_overlay/etc/alternatives/* ${TOP}/rootfs/etc/alternatives/
   sudo cp -a ${TOP}/rootfs_overlay/etc/profile.d/* ${TOP}/rootfs/etc/profile.d/
   sudo cp -a ${TOP}/rootfs_overlay/etc/rc.local ${TOP}/rootfs/etc/rc.local
   sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/* ${TOP}/rootfs/etc/systemd/system/
+  sudo cp -a ${TOP}/rootfs_overlay/etc/bluetooth ${TOP}/rootfs/etc/
+  sudo cp -a ${TOP}/rootfs_overlay/etc/dbus-1/* ${TOP}/rootfs/etc/dbus-1/
 
   sudo mkdir -p ${TOP}/rootfs/etc/xdg/weston/
   sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/weston/* ${TOP}/rootfs/etc/xdg/weston/
 
   sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/
+  sudo cp -rv ${TOP}/rootfs_overlay/lib/systemd/* ${TOP}/rootfs/lib/systemd/
+  sudo cp -rv ${TOP}/rootfs_overlay/lib/udev/* ${TOP}/rootfs/lib/udev/
 
   sync
 

@@ -26,7 +26,7 @@ END
 # apt-get source update and installation
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
-yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools bluez ppp ntp ntpdate bridge-utils can-utils v4l-utils 
+yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils 
 yes "Y" | apt install bash-completion docker.io network-manager ifupdown resolvconf alsa-utils
 
 # network configuration
@@ -79,8 +79,12 @@ yes "Y" | apt install libde265-0 libmms0 libmjpegutils-2.1-0 libvo-amrwbenc0 lib
 yes "Y" | apt install libcodec2-0.9 libxdamage1 libshout3 libchromaprint1 libusrsctp1 libjack0 libsbc1 libmplex2-2.1-0 libavc1394-0 libsoundtouch1 libfluidsynth2 libshout3 libdca0
 yes "Y" | apt install libofa0 libsrtp2-1 libdv4 libkate1 libwebrtc-audio-processing1 libaa1 libnice10 libcurl4-gnutls-dev libdvdnav4 libiec61883-0 libgraphene-1.0-0 libspandsp2 libfaad2
 
+sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
+
+# enable qca bluetooth service
+sudo systemctl  enable serial-qcabtfw@ttymxc0
 
 # let network-manager handle all network interfaces
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

@@ -49,10 +49,11 @@ Features:
 * Wayland compositor v1.18.0
 * gstreamer1.0 v1.16.2
 * VPU libraries v1.18
-* QT5 with GPU acceleration  v5.12.8 
+* QT5 with GPU acceleration  v5.12.8
 * apt-get package manager
 * openGL with GPU accelelation
 * docker container v19.03.8
+* Swap parition implementation using zram
 
 ****
 ### Build-Image

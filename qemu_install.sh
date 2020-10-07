@@ -89,10 +89,11 @@ sed -i 's/managed=false/managed=true/' /etc/NetworkManager/NetworkManager.conf
 # disable type password everytime using ubuntu user
 sed -i 's/sudo\tALL=(ALL:ALL) ALL/sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 
-echo "${COL_GREEN}Add swap partition...Default size is 128MB${COL_NORMAL}"
-dd if=/dev/zero of=/swapfile bs=1M count=128
-chmod 600 /swapfile
-mkswap /swapfile
+# zram swap size
+echo "${COL_GREEN}Add swap partition...Default size is one-fourth of total memory${COL_NORMAL}"
+yes "Y" | apt install zram-config
+sed -i 's/totalmem\ \/\ 2/totalmem\ \/\ 4/' /usr/bin/init-zram-swapping
+
 
 mkdir -p /lib/modules/
 echo -e "source /etc/profile.d/weston.sh" >> /root/.bashrc

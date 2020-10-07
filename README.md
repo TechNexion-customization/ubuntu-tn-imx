@@ -181,10 +181,13 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
 
 #### Run the apps using debug console/ssh
 
-Because the Weston desktop is running on root permission by default setting, so you must be login as **root user** if you want to execute Wayland base application, or you will face the permission issue.
+Due to Wayland protocol need root permission, so the users need export wayland necessary variables with commands if adapt **ubuntu user**, for examples:
 
-If you login as **ubuntu user**, you only can ruuning Walyand unnecessary applications
+    $ sudo -E glmark-es2-wayland
+    $ sudo -E chromium --no-sandbox --test-type
+    (Note that 'sudo -E' is necessary when run any graphic base apps)
 
+If the users login using **root user**, just issue commands without 'sudo -E' directly when run graphic base apps.
 
 #### Playback video
 

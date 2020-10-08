@@ -93,24 +93,31 @@ General Packages Installation (Ubuntu 18.04 or above)
 ****
 #### Build a runtime Image
 
-
-Lazy way, make a runtime image directly:
-Note that this BSP does support PICO-IMX8MM with PI only at this moment.
+Quick way, make a runtime image directly with parameter for target platform, default is PICO-IMX8MM without platform assigning:
 
     $ make all
     (it will download the latest u-boot, kernel and rootfs and compile them automatically)
 
-You also can compile the source code separatically:
+    PICO-IMX8MM:
+    make all PLATFORM="pico-imx8mm"
+
+    AXON-IMX8MP:
+    make all PLATFORM="axon-imx8mp"
+
+You also can compile the source code separatically, default is PICO-IMX8MM without platform assigning:
 
     $ make u-boot (download and compile the latest u-boot only)
     $ make kernel (download and compile the latest kernel only)
     $ make rootfs (download and compile the latest rootfs only)
     $ make image (package runtime image only, depend on above three items done)
-    
+
+    Example for compile u-boot with specific platform:
+    $ make u-boot PLATFORM="<target platform>" (target platform: pico-imx8mm, axon-imx8mp, etc.)
+
 Remove all compiled objects and image:
 
     $ make clean
-   
+
 #### Flash the image to the target board
 
 Output relative image files of path:

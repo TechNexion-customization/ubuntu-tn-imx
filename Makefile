@@ -30,13 +30,13 @@ clean: $(addprefix clean-,$(BUILD_STEPS))
 
 distclean: $(addprefix distclean-,$(BUILD_STEPS))
 
-u-boot: build-u-boot
+u-boot: build-u-boot $(PLATFORM)
 
 kernel: build-kernel
 
 rootfs: build-rootfs
 
-image: build-image
+image: build-image $(PLATFORM)
 
 
 .PHONY: all build clean distclean u-boot kernel rootfs

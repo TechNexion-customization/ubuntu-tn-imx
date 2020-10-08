@@ -2,6 +2,7 @@
 
 TOP=${PWD}
 
+echo "target: --------------> $1"
 echo "creating 3.4GiB empty image ..."
 sudo dd if=/dev/zero of=test.img bs=1M count=3400
 echo "created."
@@ -24,6 +25,7 @@ mkdir mnt
 sudo mount /dev/mapper/"$mapper_dev"p1 mnt
 sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/Image mnt/
 sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mm-pico-pi-ili9881c.dtb mnt/
+sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-axon-wizard.dtb mnt/
 sudo umount mnt
 
 sudo mount /dev/mapper/"$mapper_dev"p2 mnt
@@ -35,7 +37,14 @@ sudo umount mnt
 
 rm -rf mnt
 
-sudo dd if=./output/u-boot/u-boot-tn-imx/imx-mkimage/iMX8M/flash.bin of="$loop_dev" bs=1k seek=33 conv=fsync
+if [[ "$1" == "pico-imx8mm" ]]; then
+  bootloader_offset=33
+elif [[ "$1" == "axon-imx8mp" ]]; then
+  bootloader_offset=32
+fi
+
+sudo dd if=./output/u-boot/u-boot-tn-imx/imx-mkimage/iMX8M/flash.bin of="$loop_dev" bs=1k seek="$bootloader_offset" conv=fsync
+
 sync
 
 sudo kpartx -d test.img

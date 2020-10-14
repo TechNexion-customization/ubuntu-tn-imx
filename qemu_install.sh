@@ -27,7 +27,7 @@ END
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils 
-yes "Y" | apt install bash-completion docker.io ifupdown resolvconf alsa-utils gpiod cloud-utils libpolkit-agent-1-0 libpolkit-gobject-1-0 policykit-1
+yes "Y" | apt install bash-completion docker.io ifupdown resolvconf alsa-utils gpiod cloud-utils libpolkit-agent-1-0 libpolkit-gobject-1-0 policykit-1 udhcpc
 
 # network configuration
 cat <<END > /etc/network/interfaces

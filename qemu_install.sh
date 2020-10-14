@@ -88,6 +88,7 @@ dpkg -i /opt/deb/5gnr/mm/libmm-glib0_1.14.2-0.1_arm64.deb
 dpkg -i /opt/deb/5gnr/mm/libqmi-glib5_1.26.4-0.1_arm64.deb
 dpkg -i /opt/deb/5gnr/mm/libqmi-proxy_1.26.4-0.1_arm64.deb
 dpkg -i /opt/deb/5gnr/mm/modemmanager_1.14.2-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/libqmi-utils_1.26.4-0.1_arm64.deb
 
 # nmcli
 dpkg -i /opt/deb/5gnr/nm/libbluetooth3_5.55-0ubuntu1_arm64.deb

@@ -27,7 +27,7 @@ END
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils 
-yes "Y" | apt install bash-completion docker.io network-manager ifupdown resolvconf alsa-utils gpiod
+yes "Y" | apt install bash-completion docker.io ifupdown resolvconf alsa-utils gpiod cloud-utils
 
 # network configuration
 cat <<END > /etc/network/interfaces
@@ -78,6 +78,25 @@ yes "Y" | apt install libdc1394-22 libmodplug1 libsoup2.4-1 librsvg2-2 libopenmp
 yes "Y" | apt install libde265-0 libmms0 libmjpegutils-2.1-0 libvo-amrwbenc0 libwildmidi2 libmpeg2encpp-2.1-0 libvisual-0.4-0 libsrt1 libtag1-dev libcaca0 libavfilter7
 yes "Y" | apt install libcodec2-0.9 libxdamage1 libshout3 libchromaprint1 libusrsctp1 libjack0 libsbc1 libmplex2-2.1-0 libavc1394-0 libsoundtouch1 libfluidsynth2 libshout3 libdca0
 yes "Y" | apt install libofa0 libsrtp2-1 libdv4 libkate1 libwebrtc-audio-processing1 libaa1 libnice10 libcurl4-gnutls-dev libdvdnav4 libiec61883-0 libgraphene-1.0-0 libspandsp2 libfaad2
+
+
+# dpkg install latest network-manager and modem-manager for 5gnr module
+# mmcli
+dpkg -i /opt/deb/5gnr/mm/libmbim-glib4_1.24.4-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/libmbim-proxy_1.24.4-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/libmm-glib0_1.14.2-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/libqmi-glib5_1.26.4-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/libqmi-proxy_1.26.4-0.1_arm64.deb
+dpkg -i /opt/deb/5gnr/mm/modemmanager_1.14.2-0.1_arm64.deb
+
+# nmcli
+dpkg -i /opt/deb/5gnr/nm/libbluetooth3_5.55-0ubuntu1_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/libndp0_1.7-0ubuntu1_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/libselinux1_3.1-2_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/libjansson4_2.13.1-1ubuntu1_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/libnm0_1.26.2-1ubuntu1_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/libteamdctl0_1.31-1_arm64.deb
+dpkg -i /opt/deb/5gnr/nm/network-manager_1.26.2-1ubuntu1_arm64.deb
 
 sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service

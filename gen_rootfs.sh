@@ -18,6 +18,8 @@ gen_pure_rootfs() {
   sudo cp /usr/bin/qemu-aarch64-static ${TOP}/rootfs/usr/bin
   sudo LANG=C chroot ${TOP}/rootfs /debootstrap/debootstrap --second-stage
   sudo cp ${TOP}/qemu_install.sh ${TOP}/rootfs/usr/bin/
+  sudo cp -rv ${TOP}/deb/ ${TOP}/rootfs/opt/
+
   sync
 
   sudo LANG=C chroot ${TOP}/rootfs /bin/bash -c "chmod a+x /usr/bin/qemu_install.sh; /usr/bin/qemu_install.sh gui"
@@ -50,6 +52,7 @@ gen_pure_rootfs() {
   sudo LANG=C chroot ${TOP}/rootfs /bin/bash -c "sudo ldconfig"
 
   sudo rm -rf ${TOP}/rootfs/usr/bin/qemu_install.sh
+  sudo rm -rf ${TOP}/rootfs/opt/deb/
 
   cd ${TOP}/rootfs
   sudo tar --exclude='./dev/*' --exclude='./lost+found' --exclude='./mnt/*' --exclude='./media/*' --exclude='./proc/*' --exclude='./run/*' --exclude='./sys/*' --exclude='./tmp/*' --numeric-owner -czpvf ../rootfs.tgz .

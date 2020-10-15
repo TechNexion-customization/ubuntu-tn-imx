@@ -103,8 +103,8 @@ sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
 
-# enable qca bluetooth service
-sudo systemctl  enable serial-qcabtfw@ttymxc0
+# enable qca bluetooth service when boot
+# sudo systemctl  enable serial-qcabtfw@ttymxc0
 
 # let network-manager handle all network interfaces
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

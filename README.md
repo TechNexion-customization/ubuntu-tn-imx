@@ -22,6 +22,8 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * `glmark` for GPU testing
     * Run QT5 applications
     * Control WiFi connection using `nmcli`
+    * Control Bluetooth connection using `bluez5`
+    * 5GNR mobile connection using `mmcli`
     * Docker conatiner
     * Expand rootfs partition
     * Weston Keyboard shortcuts
@@ -233,14 +235,32 @@ Ubuntu adapt network-manager service to manage network status, so please use `nm
     $ sudo nmcli device wifi list
     2. Make a connection
     $ sudo nmcli device wifi connect SSID-Name password wireless-password
-    
+
     Example: WiFi AP mode
     $ sudo nmcli con add type wifi ifname wlan0 con-name Hostspot autoconnect yes ssid Hostspot
     $ sudo nmcli con modify Hostspot 802-11-wireless.mode ap 802-11-wireless.band a ipv4.method shared
     $ sudo nmcli con modify Hostspot wifi-sec.key-mgmt wpa-psk
     $ sudo nmcli con modify Hostspot wifi-sec.psk "veryveryhardpassword1234"
     $ sudo nmcli con up Hostspot
-    
+
+    Example: WiFi concurrent mode (enable P2P function on configuration of qcacld driver is necessary)
+    1. Create a virtual interface
+    $ sudo iw dev wlan0 interface add ap0 type __ap
+    2. Setting virtual interface as AP mode
+    $ sudo nmcli c add type wifi ifname ap0 con-name hotspot autoconnect no ssid Hotspot
+    $ sudo nmcli connection modify hotspot 802-11-wireless.mode ap 802-11-wireless.band a ipv4.method shared
+    $ sudo nmcli connection modify hotspot wifi-sec.key-mgmt wpa-psk
+    $ sudo nmcli connection modify hotspot wifi-sec.psk "veryveryhardpassword1234"
+    $ sudo nmcli connection up Hostspot
+    3. Make a connection on station mode
+    $ sudo nmcli device wifi connect SSID-Name password wireless-password
+
+#### Control Bluetooth connection using `bluez5`
+
+This bluez5 was be tweaked from Technexion for qca modules, so please issue command to enable bluetooth function:
+
+    $ sudo systemctl start serial-qcabtfw@ttymxc0 (wait for 5 seconds)
+    $ hciconfig
 
 #### Docker conatiner
 

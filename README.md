@@ -261,6 +261,13 @@ This bluez5 was be tweaked from Technexion for qca modules, so please issue comm
 
     $ sudo systemctl start serial-qcabtfw@ttymxc0 (wait for 5 seconds)
     $ hciconfig
+    hci0:   Type: Primary  Bus: UART
+    BD Address: 00:1F:7B:31:3D:31  ACL MTU: 1024:7  SCO MTU: 60:8
+    DOWN
+    RX bytes:672 acl:0 sco:0 events:36 errors:0
+    TX bytes:431 acl:0 sco:0 commands:36 errors:0
+
+
 
 #### Docker conatiner
 

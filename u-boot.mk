@@ -27,6 +27,10 @@ ifeq ($(PLATFORM),pico-imx8mm)
 else ifeq ($(PLATFORM),axon-imx8mp)
 	$(eval UBOOT_DEFCONFIG := axon-imx8mp_defconfig)
 	$(eval ATF_OPTION := imx8mp-axon)
+else ifeq ($(PLATFORM),edm-g-imx8mp)
+	$(eval UBOOT_DEFCONFIG := edm-g-imx8mp_defconfig)
+	$(eval ATF_OPTION := imx8mp-edm-g)
+
 endif
 
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx $(UBOOT_DEFCONFIG)

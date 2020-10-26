@@ -18,6 +18,8 @@ ifeq ($(PLATFORM),pico-imx8mm)
 	$(eval TARGET := pico-imx8mm)
 else ifeq ($(PLATFORM),axon-imx8mp)
 	$(eval TARGET := axon-imx8mp)
+else ifeq ($(PLATFORM),edm-g-imx8mp)
+	$(eval TARGET := imx8mp-edm-g)
 endif
 
 	@echo "image generating..."

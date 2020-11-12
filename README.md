@@ -2,11 +2,13 @@ Technexion Ubuntu 20.04 LTS Image Builder
 ===========================
 
 ## Support Hardware
---------
+ --------
 |System-On-Module|Baseboard|
 |---|---|
 |PICO-IMX8M-MINI|PI<br>WIZARD (WIP)|
-|EDM-G-IMX8M-PLUS|EVK(WIP)|
+|AXON-IMX8M-PLUS|WIZARD (WIP)|
+|EDM-G-IMX8M-PLUS|EVK|
+|EDM-IMX8M|WIZARD (WIP)|
 
 ****
 ## Contents
@@ -23,7 +25,7 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Run QT5 applications
     * Control WiFi connection using `nmcli`
     * Control Bluetooth connection using `bluez5`
-    * 5GNR mobile connection using `mmcli`
+    * 4G/5GNR mobile connection using `mmcli`
     * Docker conatiner
     * Expand rootfs partition
     * Weston Keyboard shortcuts
@@ -268,6 +270,92 @@ This bluez5 was be tweaked from Technexion for qca modules, so please issue comm
     TX bytes:431 acl:0 sco:0 commands:36 errors:0
 
 
+#### 4G/5GNR mobile connection using `mmcli` and `qmicli`
+
+    Step 1. Check your module works with SIM card
+    $ sudo mmcli --modem 0
+    -----------------------------------
+    General  |                    path: /org/freedesktop/ModemManager1/Modem/0
+             |               device id: 3ec985d18ecb5e64fbdda7bcfa8d0ef1d541a40c
+    -----------------------------------
+    Hardware |            manufacturer: QUALCOMM INCORPORATED
+             |                   model: 0
+             |       firmware revision: MPSS.HI.2.0.c3-00028.5-SDX55_CPEALL_PACK-1  1  [Aug 14 2020 23:00:00]
+             |          carrier config: ChunghwaTel_Taiwan_Commercial
+             | carrier config revision: 0A014F00
+             |            h/w revision: 20000
+             |               supported: gsm-umts, lte, 5gnr
+             |                 current: gsm-umts, lte, 5gnr
+             |            equipment id: 864284040065893
+    -----------------------------------
+    System   |                  device: /sys/devices/platform/32f10108.usb/38200000.dwc3/xhci-hcd.1.auto/usb1/1-1/1-1.3
+             |                 drivers: option1, qmi_wwan
+             |                  plugin: simtech
+             |            primary port: cdc-wdm0
+             |                   ports: cdc-wdm0 (qmi), ttyUSB0 (qcdm), ttyUSB2 (at), wwan0 (net), 
+             |                          ttyUSB4 (audio), ttyUSB1 (gps), ttyUSB3 (at)
+    -----------------------------------
+    Status   |                    lock: sim-pin2
+             |          unlock retries: sim-pin (3), sim-puk (10), sim-pin2 (3), sim-puk2 (10)
+             |                   state: disabled
+             |             power state: on
+             |          signal quality: 0% (cached)
+    -----------------------------------
+    Modes    |               supported: allowed: 3g; preferred: none
+             |                          allowed: 4g; preferred: none
+             |                          allowed: 3g, 4g; preferred: 4g
+             |                          allowed: 3g, 4g; preferred: 3g
+             |                          allowed: 5g; preferred: none
+             |                          allowed: 3g, 5g; preferred: 5g
+             |                          allowed: 3g, 5g; preferred: 3g
+             |                          allowed: 4g, 5g; preferred: 5g
+             |                          allowed: 4g, 5g; preferred: 4g
+             |                          allowed: 3g, 4g, 5g; preferred: 5g
+             |                          allowed: 3g, 4g, 5g; preferred: 4g
+             |                          allowed: 3g, 4g, 5g; preferred: 3g
+             |                 current: allowed: 4g, 5g; preferred: 5g
+    -----------------------------------
+    Bands    |               supported: utran-1, utran-3, utran-4, utran-6, utran-5, utran-8, 
+             |                          utran-9, utran-2, eutran-1, eutran-2, eutran-3, eutran-4, eutran-5, 
+             |                          eutran-7, eutran-8, eutran-12, eutran-13, eutran-14, eutran-17, 
+             |                          eutran-18, eutran-19, eutran-20, eutran-25, eutran-26, eutran-28, 
+             |                          eutran-29, eutran-30, eutran-32, eutran-34, eutran-38, eutran-39, 
+             |                          eutran-40, eutran-41, eutran-42, eutran-43, eutran-46, eutran-48, 
+             |                          eutran-66, eutran-67, eutran-71, utran-19
+             |                 current: utran-1, utran-3, utran-4, utran-6, utran-5, utran-8, 
+             |                          utran-9, utran-2, eutran-1, eutran-2, eutran-3, eutran-4, eutran-5, 
+             |                          eutran-7, eutran-8, eutran-12, eutran-13, eutran-14, eutran-17, 
+             |                          eutran-18, eutran-19, eutran-20, eutran-25, eutran-26, eutran-28, 
+             |                          eutran-29, eutran-30, eutran-32, eutran-34, eutran-38, eutran-39, 
+             |                          eutran-40, eutran-41, eutran-42, eutran-48, eutran-66, eutran-67, 
+             |                          eutran-71, utran-19
+    -----------------------------------
+    IP       |               supported: ipv4, ipv6, ipv4v6
+    -----------------------------------
+    3GPP     |                    imei: 864284040065893
+    -----------------------------------
+    3GPP EPS |    ue mode of operation: csps-2
+    -----------------------------------
+    SIM      |        primary sim path: /org/freedesktop/ModemManager1/SIM/1
+             |          sim slot paths: slot 1: /org/freedesktop/ModemManager1/SIM/0
+             |                          slot 2: none (active) 
+
+    Step 2. Make a quick connection (Example: ChungHwa Telecom APN is 'internet')
+    $ sudo mmcli --modem 0 --simple-connect="apn=internet"
+
+    Step 3. Get IP address using dhcp way
+    $ sudo udhcpc -i wwan0
+
+    Step 4. It works! You can starting enjoy your mobile network such as ping command
+    $ ping 8.8.8.8
+
+* Tested modules
+    * mPCIE
+        * FIBOCOM NL668-EU (4G)
+    * M.2
+        * SIMCOM SIM8202G-M2 (5GNR)
+        * TELIT LN930 (4G)
+        * SIERRA EM7430 (4G)
 
 #### Docker conatiner
 
@@ -302,7 +390,7 @@ The system will starting expand rootfs partition and wait for about 10 seconds, 
 
 
 
-****
+**** 
 ### Apps-Developing
 -----------
 

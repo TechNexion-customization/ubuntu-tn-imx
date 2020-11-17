@@ -5,7 +5,7 @@
 
 include common.mk
 
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.24_2.1.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
 UBOOT_COMMIT := `git ls-remote https://github.com/TechNexion/u-boot-tn-imx.git $(UBOOT_BRANCH) | awk '{print $$1}'`
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 

@@ -5,7 +5,7 @@
 
 include common.mk
 
-KERNEL_BRANCH := tn-imx_5.4.24_2.1.0-next
+KERNEL_BRANCH := tn-imx_5.4.47_2.2.0-next
 KERNEL_COMMIT := `git ls-remote https://github.com/TechNexion/linux-tn-imx.git $(KERNEL_BRANCH) | awk '{print $$1}'`
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 KERNEL_DEFCONFIG := tn_imx8_defconfig

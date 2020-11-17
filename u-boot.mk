@@ -30,6 +30,9 @@ else ifeq ($(PLATFORM),axon-imx8mp)
 else ifeq ($(PLATFORM),edm-g-imx8mp)
 	$(eval UBOOT_DEFCONFIG := edm-g-imx8mp_defconfig)
 	$(eval ATF_OPTION := imx8mp-edm-g)
+else ifeq ($(PLATFORM),edm-imx8m)
+	$(eval UBOOT_DEFCONFIG := edm-imx8mq_defconfig)
+	$(eval ATF_OPTION := imx8mq-edm-wizard)
 
 endif
 

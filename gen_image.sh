@@ -24,8 +24,15 @@ mkdir mnt
 
 sudo mount /dev/mapper/"$mapper_dev"p1 mnt
 sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/Image mnt/
-sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mm-pico-pi-ili9881c.dtb mnt/
-sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-axon-wizard.dtb mnt/
+if [[ "$1" == "pico-imx8mm" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mm-pico-pi-ili9881c.dtb mnt/
+elif [[ "$1" == "axon-imx8mp" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-axon-wizard.dtb mnt/
+elif [[ "$1" == "edm-g-imx8mp" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-edm-g-wb.dtb mnt/
+elif [[ "$1" == "edm-imx8m" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mq-edm-wizard.dtb mnt/
+fi
 sudo umount mnt
 
 sudo mount /dev/mapper/"$mapper_dev"p2 mnt
@@ -37,9 +44,9 @@ sudo umount mnt
 
 rm -rf mnt
 
-if [[ "$1" == "pico-imx8mm" ]]; then
+if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]]; then
   bootloader_offset=33
-elif [[ "$1" == "axon-imx8mp" ]]; then
+elif [[ "$1" == "axon-imx8mp" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
   bootloader_offset=32
 fi
 

@@ -44,7 +44,7 @@ sudo umount mnt
 
 rm -rf mnt
 
-if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]]; then
+if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]] || [[ "$1" == "pico-imx8m" ]]; then
   bootloader_offset=33
 elif [[ "$1" == "axon-imx8mp" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
   bootloader_offset=32

@@ -40,7 +40,7 @@ gen_pure_rootfs() {
 
   if [[ "$@" == "pico-imx8mm" ]] || [[ "$@" == "edm-g-imx8mp" ]] || [[ "$@" == "axon-imx8mp" ]] ; then
     sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc0.service ${TOP}/rootfs/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc0.service
-  elif [[ "$@" == "edm-imx8m" ]]; then
+  elif [[ "$@" == "edm-imx8m" ]] ||  [[ "$@" == "pico-imx8m" ]] ; then
     sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc1.service ${TOP}/rootfs/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc1.service
   fi
 

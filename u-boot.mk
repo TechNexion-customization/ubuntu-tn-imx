@@ -33,6 +33,9 @@ else ifeq ($(PLATFORM),edm-g-imx8mp)
 else ifeq ($(PLATFORM),edm-imx8m)
 	$(eval UBOOT_DEFCONFIG := edm-imx8mq_defconfig)
 	$(eval ATF_OPTION := imx8mq-edm-wizard)
+else ifeq ($(PLATFORM),pico-imx8m)
+	$(eval UBOOT_DEFCONFIG := pico-imx8mq_defconfig)
+	$(eval ATF_OPTION := imx8mq-pico-pi)
 
 endif
 

@@ -22,6 +22,8 @@ else ifeq ($(PLATFORM),edm-g-imx8mp)
 	$(eval TARGET := edm-g-imx8mp)
 else ifeq ($(PLATFORM),edm-imx8m)
 	$(eval TARGET := edm-imx8m)
+else ifeq ($(PLATFORM),pico-imx8m)
+	$(eval TARGET := pico-imx8m)
 endif
 
 	@echo "image generating..."

@@ -31,6 +31,7 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Expand rootfs partition
     * Weston Keyboard shortcuts
     * Chromium
+    * Device Tree Overlay
 
 * [Apps-Developing](#Apps-Developing)
 * [Known-Limitations](#Known-issues)
@@ -206,18 +207,36 @@ If the users login using **root user**, just issue commands without 'sudo -E' di
 Adapt gstreamer-1.0 which supports avi, mp4, mkv and webm format files, please change to root user and issue quick command to play video:
 
     # gplay-1.0 /home/ubuntu/mnt/test.mp4
-    
+
     You should be see a resolution problem because ILI9881C is a portrait screen, please issue standard command to playback on fullscreen mode:
-    
+
     # gst-launch-1.0 playbin uri=file:///home/ubuntu/mnt/test.mp4 video-sink="glimagesink render-rectangle=<1,1,1280,720>"
-    
+
     Of course if your panel is base on landscape screen such as HDMI, you can use gplay directly.
 
 
+    Special case: PICO-IMX8M and EDM-IMX8M
+
+    They're adapt dcss engine for DRM, different with other platforms, so dcss must assign specfic video-sink as follows example:
+
+    # gplay-1.0 /home/ubuntu/mnt/test.mp4 --video-sink="glimagesink render-rectangle=<1,1,1920,1080>"
+
 #### `glmark` for GPU benchmark testing
 
-    # glmark2-es2-wayland
+    # glmark2-es2-wayland --debug
 
+
+    Special case: PICO-IMX8M and EDM-IMX8M
+
+    We adapt 768MB CMA size For 1GB memory SKu. compatible, so sometimes GPU loading is to heavy cause app hang, we have two ways to fix this issue:
+
+    1. Increase CMA size to 900M (0x3c000000) in dtsi file of kernel source, then re-compile device tree as follows command, then replace old dtb file.
+
+    $ make dtbs
+
+    Note that this way only wokrs on up to 2GB memory size Sku..
+
+    2. Change display resolution less than 1080P in /etc/xdg/weston/weston.ini, then reboot.
 
 #### Run QT5 applications
 
@@ -389,9 +408,27 @@ The system will starting expand rootfs partition and wait for about 10 seconds, 
 |2| basic browser| # chromium --no-sandbox --test-type
 |3| kiosk mode (full screen)| # chromium --no-sandbox --test-type --start-fullscreen www.technexion.com
 
+#### Device Tree Overlay
 
+Boot into u-boot prompt, issue commands to enable new function using device tree overlay technology:
 
-**** 
+    $ setenv dtoverlay '<dtoverlay target name>'
+    $ saveenv
+    $ boot
+
+Support list:
+
+|platform|overlay function|dtoverlay target name|
+|---|---|----
+|EDM-G-IMX8MP| 10" VL10112880 LVDS panel| lvds-vl10112880
+|EDM-G-IMX8MP| 21.5" VL215192108 LVDS panel| lvds-vl215192108
+|PICO-IMX8M| 5" ILI9881C MIPI panel| mipi-dcss-ili9881c
+|EDM-IMX8M| 5" ILI9881C MIPI panel| mipi-dcss-ili9881c
+|EDM-IMX8M| 8" G080UAN01 MIPI panel| mipi-dcss-g080uan01
+|EDM-IMX8M| 10" G101UAN02 MIPI panel| mipi-dcss-g101uan02
+|EDM-IMX8M| MIPI-To-HDMI | mipi2hdmi-adv7535
+
+****
 ### Apps-Developing
 -----------
 

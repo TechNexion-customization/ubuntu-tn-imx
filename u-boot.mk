@@ -5,7 +5,26 @@
 
 include common.mk
 
+ifeq ($(PLATFORM),pico-imx8mm)
 UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
+else ifeq ($(PLATFORM),axon-imx8mp)
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
+else ifeq ($(PLATFORM),edm-g-imx8mp)
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
+else ifeq ($(PLATFORM),edm-imx8m)
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
+else ifeq ($(PLATFORM),pico-imx8m)
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.47_2.2.0-next
+else ifeq ($(PLATFORM),pico-imx6)
+UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
+else ifeq ($(PLATFORM),edm-imx6)
+UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
+else ifeq ($(PLATFORM),pico-imx6ull)
+UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
+else ifeq ($(PLATFORM),pico-imx7d)
+UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
+endif
+
 UBOOT_COMMIT := `git ls-remote https://github.com/TechNexion/u-boot-tn-imx.git $(UBOOT_BRANCH) | awk '{print $$1}'`
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 
@@ -36,12 +55,38 @@ else ifeq ($(PLATFORM),edm-imx8m)
 else ifeq ($(PLATFORM),pico-imx8m)
 	$(eval UBOOT_DEFCONFIG := pico-imx8mq_defconfig)
 	$(eval ATF_OPTION := imx8mq-pico-pi)
-
+else ifeq ($(PLATFORM),pico-imx6)
+	$(eval UBOOT_DEFCONFIG := pico-imx6_spl_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),edm-imx6)
+	$(eval UBOOT_DEFCONFIG := edm-imx6_spl_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),pico-imx6ull)
+	$(eval UBOOT_DEFCONFIG := pico-imx6ul_spl_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),pico-imx7d)
+	$(eval UBOOT_DEFCONFIG := pico-imx7d_spl_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
 endif
 
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx $(UBOOT_DEFCONFIG)
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx -j$(CPUS) all
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+
+ifeq ($(PLATFORM),pico-imx8mm)
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+else ifeq ($(PLATFORM),axon-imx8mp)
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+else ifeq ($(PLATFORM),edm-g-imx8mp)
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+else ifeq ($(PLATFORM),edm-imx8m)
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+else ifeq ($(PLATFORM),pico-imx8m)
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+endif
 
 src:
 	mkdir -p $(UBOOT_DIR)

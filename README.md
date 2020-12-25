@@ -20,7 +20,9 @@ Technexion Ubuntu 20.04 LTS Image Builder
 |PICO-IMX6ULL|PI<br>NYMPH|
 |PICO-IMX7|PI<br>NYMPH|
 
-|Revision|Ubuntu 20.04 LTS|
+## User Guide
+ --------
+|Platforms|Instruction|
 |---|---|
-|IMX8 series | [Wayland base]() |
+|IMX8 series | [Wayland base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx8.md#contents) |
 |IMX6/IMX7 series |[X11 base]() |

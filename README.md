@@ -20,6 +20,12 @@ Technexion Ubuntu 20.04 LTS Image Builder
 |PICO-IMX6ULL|PI<br>NYMPH|
 |PICO-IMX7|PI<br>NYMPH|
 
+## System Requirement
+ --------
+* CPU: NXP IMX6/IMX6ULL/IMX7/IMX8 SoC
+* Memory size: Up to 512MB
+* WiFi module: PIXI-9377 module
+
 ## User Guide
  --------
 |Platforms|Instruction|

@@ -1,25 +1,15 @@
-Technexion Ubuntu 20.04 LTS Image Builder
+IMX8 Platforms for Ubuntu 20.04 with Wayland Framework
 ===========================
-
-## Support Hardware
- --------
-|System-On-Module|Baseboard|
-|---|---|
-|PICO-IMX8M-MINI|PI<br>WIZARD (WIP)|
-|AXON-IMX8M-PLUS|WIZARD (WIP)|
-|EDM-G-IMX8M-PLUS|WANDBOARD|
-|PICO-IMX8M|PI|
-|EDM-IMX8M|WIZARD|
 
 ****
 ## Contents
 * [Overview](#Overview)
-* [Build-Image (for developer)](#Build-Image)
+* [Build Ubuntu Image (for developer)](#Build-Image)
     * Download the source code
     * Compiling Environment Setup
     * Build a runtime Image
     * Flash the image to the target board
-* [Quick-Start (for user)](#Quick-Start)
+* [Quick Start (for user)](#Quick-Start)
     * Run the apps using debug console/ssh
     * Playback video
     * `glmark` for GPU testing
@@ -33,8 +23,8 @@ Technexion Ubuntu 20.04 LTS Image Builder
     * Chromium
     * Device Tree Overlay
 
-* [Apps-Developing](#Apps-Developing)
-* [Known-Limitations](#Known-issues)
+* [Apps Developing](#Apps-Developing)
+* [Known Limitations](#Known-issues)
 
 ****
 ### Overview
@@ -62,7 +52,7 @@ Features:
 * Swap parition implementation using zram
 
 ****
-### Build-Image
+### <a name="Build-Image"></a>Build Ubuntu Image
 -----------
 
 #### Download the source code
@@ -73,13 +63,15 @@ Install git first:
 
     $ sudo apt-get install repo
 
+Note that repo already support ptthon 3.7+ only from 2020 ends, if your host OS is Ubuntu, please adapt Ubuntu 20.04, it can get newer repo base on python 3.7, or you need fix it manually.
+
 Download source code:
 
-    $ git clone https://github.com/TechNexion-customization/ubuntu-tn-imx8.git
+    $ git clone https://github.com/TechNexion-customization/ubuntu-tn-imx.git
 
 #### Compiling environment setup
 
-General Packages Installation (Ubuntu 18.04 or above)
+General Packages Installation (Ubuntu 20.04 is recommended)
 
     Install necessary packages
     $ sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
@@ -107,8 +99,17 @@ Quick way, make a runtime image directly with parameter for target platform, def
     PICO-IMX8MM:
     make all PLATFORM="pico-imx8mm"
 
-    AXON-IMX8MP:
-    make all PLATFORM="axon-imx8mp"
+    AXON-E-IMX8MP:
+    make all PLATFORM="axon-e-imx8mp"
+
+    EDM-G-IMX8MP:
+    make all PLATFORM="edm-g-imx8mp"
+
+    PICO-IMX8M:
+    make all PLATFORM="pico-imx8m"
+
+    EDM-IMX8M:
+    make all PLATFORM="edm-imx8m"
 
 You also can compile the source code separatically, default is PICO-IMX8MM without platform assigning:
 
@@ -189,7 +190,7 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
     Please contact sales@technexion.com to get firmware files.
 
 ****
-### Quick-Start
+### <a name="Quick-Start"></a> Quick Start
 -----------
 
 #### Run the apps using debug console/ssh
@@ -429,7 +430,7 @@ Support list:
 |EDM-IMX8M| MIPI-To-HDMI | mipi2hdmi-adv7535
 
 ****
-### Apps-Developing
+### <a name="Apps-Developing"></a> Apps Developing
 -----------
 
 **Toolchain**
@@ -471,7 +472,7 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 
 
 ****
-### Known-Limitations
+### <a name="Known-Limitations"></a>Known Limitations
 -----------
 
 1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.

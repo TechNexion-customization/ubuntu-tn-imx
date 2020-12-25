@@ -8,7 +8,34 @@ include common.mk
 KERNEL_BRANCH := tn-imx_5.4.47_2.2.0-next
 KERNEL_COMMIT := `git ls-remote https://github.com/TechNexion/linux-tn-imx.git $(KERNEL_BRANCH) | awk '{print $$1}'`
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
+
+ifeq ($(PLATFORM),pico-imx8mm)
 KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),axon-imx8mp)
+KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),edm-g-imx8mp)
+KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),edm-imx8m)
+KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),pico-imx8m)
+KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),pico-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),edm-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),pico-imx6ull)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),pico-imx7d)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+endif
 
 QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.0
 QCACLD_COMMIT := `git ls-remote https://github.com/TechNexion/qcacld-2.0.git $(QCACLD_BRANCH) | awk '{print $$1}'`

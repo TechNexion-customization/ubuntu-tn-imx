@@ -25,6 +25,14 @@ else ifeq ($(PLATFORM),edm-imx8m)
 	$(eval TARGET := edm-imx8m)
 else ifeq ($(PLATFORM),pico-imx8m)
 	$(eval TARGET := pico-imx8m)
+else ifeq ($(PLATFORM),pico-imx6)
+	$(eval TARGET := pico-imx6)
+else ifeq ($(PLATFORM),edm-imx6)
+	$(eval TARGET := edm-imx6)
+else ifeq ($(PLATFORM),pico-imx6ull)
+	$(eval TARGET := pico-imx6ull)
+else ifeq ($(PLATFORM),pico-imx7d)
+	$(eval TARGET := pico-imx7d)
 endif
 
 	@echo "build rootfs..."

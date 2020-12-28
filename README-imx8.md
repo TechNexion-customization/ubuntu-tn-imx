@@ -270,11 +270,11 @@ Ubuntu adapt network-manager service to manage network status, so please use `nm
     1. Create a virtual interface
     $ sudo iw dev wlan0 interface add ap0 type __ap
     2. Setting virtual interface as AP mode
-    $ sudo nmcli c add type wifi ifname ap0 con-name hotspot autoconnect no ssid Hotspot
-    $ sudo nmcli connection modify hotspot 802-11-wireless.mode ap 802-11-wireless.band a ipv4.method shared
-    $ sudo nmcli connection modify hotspot wifi-sec.key-mgmt wpa-psk
-    $ sudo nmcli connection modify hotspot wifi-sec.psk "veryveryhardpassword1234"
-    $ sudo nmcli connection up Hostspot
+    $ sudo nmcli c add type wifi ifname ap0 con-name hotspot_test autoconnect no ssid Hotspot
+    $ sudo nmcli connection modify hotspot_test 802-11-wireless.mode ap 802-11-wireless.band a ipv4.method shared
+    $ sudo nmcli connection modify hotspot_test wifi-sec.key-mgmt wpa-psk
+    $ sudo nmcli connection modify hotspot_test wifi-sec.psk "veryveryhardpassword1234"
+    $ sudo nmcli connection up hotspot_test
     3. Make a connection on station mode
     $ sudo nmcli device wifi connect SSID-Name password wireless-password
 

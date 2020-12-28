@@ -2,8 +2,8 @@ Technexion Ubuntu 20.04 LTS Image Builder
 ===========================
 
 ![](https://img.shields.io/badge/Release-v20.04LTS_01-green.svg)
-![](https://img.shields.io/badge/Producer-wigcheng-orange.svg)
-![](https://img.shields.io/badge/License-GPL3.0-blue.svg)
+![](https://img.shields.io/badge/Producer-Technexion-blue.svg)
+![](https://img.shields.io/badge/License-GPL3.0-orange.svg)
 
 
 ## Support Hardware

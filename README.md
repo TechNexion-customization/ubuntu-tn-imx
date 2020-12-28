@@ -30,5 +30,5 @@ Technexion Ubuntu 20.04 LTS Image Builder
  --------
 |Platforms|Instruction|
 |---|---|
-|IMX8 series | [Wayland base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx8.md#contents) |
-|IMX6/IMX7 series |[X11 base]() |
+|IMX8 series | [Wayland base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx8.md#imx8-platforms-for-ubuntu-2004-with-wayland-framework) |
+|IMX6/IMX7 series |[X11 base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx6.md#imx6imx7-platforms-for-ubuntu-2004-with-x11-framework) |

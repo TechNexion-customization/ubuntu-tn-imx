@@ -88,7 +88,9 @@ else
 
   sudo touch mnt/uEnv.txt
   sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
-  sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24 video=mxcfb1:dev=ldb,LDB-XGA,if=RGB24 >> mnt/uEnv.txt'
+  if [[ "$(echo "$1" | grep "imx6$")" ]]; then
+    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24 video=mxcfb1:dev=ldb,LDB-XGA,if=RGB24 >> mnt/uEnv.txt'
+  fi
   sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
 
   sudo umount mnt

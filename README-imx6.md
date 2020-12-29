@@ -246,7 +246,48 @@ We support libQT5 relate libraries, you can develop your apps using QT-Creator, 
 
 #### Control WiFi connection
 
-Ubuntu adapt network-manager service to manage network status, so please use `nmcli` to change the configuration if you need:
+Ubuntu adapt network-manager GUI to manage network status, so please folow steps to create wifi connection:
+
+##### Station mode
+
+Clicking the network manager icon of right top side.
+Note that please select the hotspot under "Wi-Fi Networks (wlan0)", NOT "Wi-Fi Networks (p2p0)", or you will got a connection failed message.
+![station-1](figures/imx6/wifi-sta-1.png)
+
+Then enter the password for your target hotspot, note that the "Wi-Fi adapter" need choose wlan0, it works after click "Connect" button.
+You can use virtual keyboard "onboard" to keyin password if you have no keyboard as follows picture.
+
+![station-2](figures/imx6/wifi-sta-2.png)
+
+Start enjoy your WiFi network.
+
+![station-3](figures/imx6/wifi-sta-3.png)
+
+##### AP mode
+
+Please choose the "Edit Connections" item first.
+
+![ap-1](figures/imx6/wifi-ap-1.png)
+
+Coose plus button for "add new connection".
+
+![ap-2](figures/imx6/wifi-ap-2.png)
+
+Choose the "Wi-Fi" as your connection type.
+
+![ap-3](figures/imx6/wifi-ap-3.png)
+
+Setting the relative configuration as following picture, remember to set "Hostpot" as default mode.
+
+![ap-4](figures/imx6/wifi-ap-4.png)
+
+Setting the WPA password(recommended), then save the configuration and exit, and reboot the Ubuntu.
+
+![ap-5](figures/imx6/wifi-ap-5.png)
+
+Note that some resolution of screen may not show the save item(too small), please click the WPA password text once, and plug-in a USB keyboard, then press "TAB" key two times and press "Enter" key to save it directly.
+
+After reboot, the hotspot already works! the user can connect it via smart phone, notebook or other devices.
 
 
 #### Control Bluetooth connection

@@ -73,12 +73,11 @@ gen_pure_rootfs() {
     sudo mkdir -p ${TOP}/rootfs/etc/xdg/weston/
     sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/weston/* ${TOP}/rootfs/etc/xdg/weston/
 
-    sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/
     sudo cp -rv ${TOP}/rootfs_overlay/lib/systemd/* ${TOP}/rootfs/lib/systemd/
     sudo cp -rv ${TOP}/rootfs_overlay/lib/udev/* ${TOP}/rootfs/lib/udev/
 
     sync
-  elif [[ $(echo $1 | grep "imx6") ]]; then
+  elif [[ $(echo $1 | grep "imx6$") ]]; then
 
     # fs-overlay
     echo "Start copy VPU relate libraries"
@@ -210,27 +209,32 @@ gen_pure_rootfs() {
     # desktop configuration
     sudo cp -a ${TOP}/rootfs_overlay/etc/X11/xorg.conf ${TOP}/rootfs/etc/X11/xorg.conf
 
-  elif [[ $(echo $1 | grep "imx7") ]] || [[ $(echo $1 | grep "imx6ull") ]]; then
+  elif [[ $(echo $1 | grep "imx7d$") ]] || [[ $(echo $1 | grep "imx6ull$") ]]; then
     sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
   fi
 
-  sudo cp -a ${TOP}/rootfs_overlay/etc/slim.conf ${TOP}/rootfs/etc/slim.conf
-  sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.fluxbox/startup ${TOP}/rootfs/home/ubuntu/.fluxbox/startup
-  sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-standby.jpg ${TOP}/rootfs/etc/xdg/tn-standby.jpg
-  sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/etc/xdg/tn-weston.png
-  sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/usr/share/backgrounds/xfce/xfce-stripes.png
+  if [[ $(echo $1 | grep "imx6") ]] || [[ $(echo $1 | grep "imx7d") ]]; then
+    sudo cp -a ${TOP}/rootfs_overlay/etc/slim.conf ${TOP}/rootfs/etc/slim.conf
+    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.fluxbox/startup ${TOP}/rootfs/home/ubuntu/.fluxbox/startup
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-standby.jpg ${TOP}/rootfs/etc/xdg/tn-standby.jpg
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/etc/xdg/tn-weston.png
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/usr/share/backgrounds/xfce/xfce-stripes.png
 
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libprotobuf.so.20 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libprotobuf.so.20.0.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbbmalloc_proxy.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbbmalloc.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbb.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-  sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7.0.5 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libprotobuf.so.20 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libprotobuf.so.20.0.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbbmalloc_proxy.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbbmalloc.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbb.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7.0.5 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+  fi
+
+  sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/
 
   sudo LANG=C chroot ${TOP}/rootfs /bin/bash -c "sudo ldconfig"
 
   sudo rm -rf ${TOP}/rootfs/usr/bin/qemu_install.sh
+  sudo rm -rf ${TOP}/rootfs/usr/bin/qemu_install-imx6_7.sh
   sudo rm -rf ${TOP}/rootfs/opt/deb/
 
   cd ${TOP}/rootfs

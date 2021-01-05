@@ -29,7 +29,7 @@ END
 yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils
-yes "Y" | apt install bash-completion docker.io ifupdown resolvconf alsa-utils gpiod cloud-utils udhcpc feh modemmanager software-properties-common
+yes "Y" | apt install bash-completion docker.io ifupdown resolvconf alsa-utils gpiod cloud-utils udhcpc feh modemmanager software-properties-common bluez blueman
 
 # audio setting
 cat <<END > /home/ubuntu/.asoundrc
@@ -163,13 +163,8 @@ xset s off
 xset dpms 0 0 0
 xset -dpms s off
 
-sudo chmod 0777 /dev/fb0
-sudo chmod 0777 /dev/fb1
-sudo chmod 0777 /dev/mxc_*
-sudo chmod 0777 /dev/video*
-sudo chmod 0777 /dev/galcore
-sudo chmod -R 0777 /dev/snd/*
-sudo chmod -R 0777 /dev/dri/*
+blueman-applet &
+
 END
 
 mkdir -p /home/ubuntu/.config/autostart/

@@ -61,7 +61,7 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/etc/rc.local ${TOP}/rootfs/etc/rc.local
     sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/rc-local.service ${TOP}/rootfs/etc/systemd/system/rc-local.service
 
-    if [[ "$@" == "pico-imx8mm" ]] || [[ "$@" == "edm-g-imx8mp" ]] || [[ "$@" == "axon-imx8mp" ]] ; then
+    if [[ "$@" == "pico-imx8mm" ]] || [[ "$@" == "edm-g-imx8mp" ]] || [[ "$@" == "axon-e-imx8mp" ]] ; then
       sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc0.service ${TOP}/rootfs/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc0.service
     elif [[ "$@" == "edm-imx8m" ]] ||  [[ "$@" == "pico-imx8m" ]] ; then
       sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc1.service ${TOP}/rootfs/etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc1.service

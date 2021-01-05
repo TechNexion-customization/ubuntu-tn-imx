@@ -7,7 +7,7 @@ include common.mk
 
 ifeq ($(PLATFORM),pico-imx8mm)
 UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
-else ifeq ($(PLATFORM),axon-imx8mp)
+else ifeq ($(PLATFORM),axon-e-imx8mp)
 UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
 else ifeq ($(PLATFORM),edm-g-imx8mp)
 UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
@@ -43,7 +43,7 @@ ifeq ($(PLATFORM),pico-imx8mm)
 	$(eval UBOOT_DEFCONFIG := pico-imx8mm_defconfig)
 	$(eval ATF_OPTION := imx8mm-pico-pi)
 	@sed -i 's/imx8mm-pico-pi.dtb/imx8mm-pico-pi-ili9881c.dtb/' $(UBOOT_DIR)/u-boot-tn-imx/configs/pico-imx8mm_defconfig;
-else ifeq ($(PLATFORM),axon-imx8mp)
+else ifeq ($(PLATFORM),axon-e-imx8mp)
 	$(eval UBOOT_DEFCONFIG := axon-imx8mp_defconfig)
 	$(eval ATF_OPTION := imx8mp-axon)
 else ifeq ($(PLATFORM),edm-g-imx8mp)
@@ -78,7 +78,7 @@ endif
 
 ifeq ($(PLATFORM),pico-imx8mm)
 	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
-else ifeq ($(PLATFORM),axon-imx8mp)
+else ifeq ($(PLATFORM),axon-e-imx8mp)
 	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
 else ifeq ($(PLATFORM),edm-g-imx8mp)
 	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -

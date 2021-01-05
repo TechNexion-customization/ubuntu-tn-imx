@@ -33,7 +33,7 @@ fi
 
 if [[ "$1" == "pico-imx8mm" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mm-pico-pi-ili9881c.dtb mnt/
-elif [[ "$1" == "axon-imx8mp" ]]; then
+elif [[ "$1" == "axon-e-imx8mp" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-axon-wizard.dtb mnt/
 elif [[ "$1" == "edm-g-imx8mp" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-edm-g-wb.dtb mnt/
@@ -76,7 +76,7 @@ sudo umount mnt
 if [[ "$(echo "$1" | grep "imx8")" ]]; then
   if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]] || [[ "$1" == "pico-imx8m" ]]; then
     bootloader_offset=33
-  elif [[ "$1" == "axon-imx8mp" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
+  elif [[ "$1" == "axon-e-imx8mp" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
     bootloader_offset=32
   fi
   sudo dd if=./output/u-boot/u-boot-tn-imx/imx-mkimage/iMX8M/flash.bin of="$loop_dev" bs=1k seek="$bootloader_offset" conv=fsync

@@ -18,9 +18,7 @@ IMX6/IMX7 Platforms for Ubuntu 20.04 with X11 Framework
     * 4G/5GNR mobile connection
     * Docker conatiner
     * Expand rootfs partition
-    * Weston Keyboard shortcuts
-    * Chromium
-    * Device Tree Overlay
+    * Firefox
 
 * [Apps Developing](#Apps-Developing)
 * [Known Limitations](#Known-issues)
@@ -141,7 +139,7 @@ Step 2. Change the boot mode from eMMC mode to serial download mode
 
 Step 3. Issue uuu command to flash the compiled Ubuntu image to eMMC:
 
-    $ sudo uuu/linux64/uuu -b emmc_img imx8mm/pico-imx8mm-flash.bin ubuntu.img
+    $ sudo uuu/linux64/uuu -b emmc_img imx6/pico-imx6-flash.bin ubuntu.img
 
 Step 4. Change back boot mode from serial download mode to eMMC mode, it should be works!
 
@@ -177,11 +175,11 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
     $ sudo cp -a <firmware path>/qca9377/utf30.bin mnt/lib/firmware/qca9377/
     $ sudo cp -a <firmware path>/wlan/cfg.dat mnt/lib/firmware/wlan/cfg.dat
     $ sudo cp -a <firmware path>/wlan/qca9377/qcom_cfg.ini mnt/lib/firmware/wlan/qca9377/qcom_cfg.ini
-    
+
     Bluetooth:
     $ sudo cp -a <firmware path>/qca/nvm_tlv_3.2.bin mnt/lib/firmware/qca/nvm_tlv_3.2.bin
     $ sudo cp -a <firmware path>/qca/rampatch_tlv_3.2.tlv mnt/lib/firmware/qca/rampatch_tlv_3.2.tlv
-    
+
     Please contact sales@technexion.com to get firmware files.
 
 ****
@@ -190,59 +188,22 @@ Step 6. Host PC side: Adapt basic `dd` command is enough for image flashing:
 
 #### Run the apps using debug console/ssh
 
-Due to Wayland protocol need root permission, so the users need export wayland necessary variables with commands if adapt **ubuntu user**, for examples:
-
-    $ sudo -E glmark-es2-wayland
-    $ sudo -E chromium --no-sandbox --test-type
-    (Note that 'sudo -E' is necessary when run any graphic base apps)
-
-If the users login using **root user**, just issue commands without 'sudo -E' directly when run graphic base apps.
+    $ export DISPLAY=:0.0
+    $ firefox
 
 #### Playback video
 
 Adapt gstreamer-1.0 which supports avi, mp4, mkv and webm format files, please change to root user and issue quick command to play video:
 
-    # gplay-1.0 /home/ubuntu/mnt/test.mp4
+    $ gplay-1.0 /home/ubuntu/mnt/test.mp4
 
-    You should be see a resolution problem because ILI9881C is a portrait screen, please issue standard command to playback on fullscreen mode:
-
-    # gst-launch-1.0 playbin uri=file:///home/ubuntu/mnt/test.mp4 video-sink="glimagesink render-rectangle=<1,1,1280,720>"
-
-    Of course if your panel is base on landscape screen such as HDMI, you can use gplay directly.
-
-
-    Special case: PICO-IMX8M and EDM-IMX8M
-
-    They're adapt dcss engine for DRM, different with other platforms, so dcss must assign specfic video-sink as follows example:
-
-    # gplay-1.0 /home/ubuntu/mnt/test.mp4 --video-sink="glimagesink render-rectangle=<1,1,1920,1080>"
+    Specific audio card output
+    $ gplay-1.0 /home/ubuntu/mnt/test.mp4 --audio-sink="alsasink device=plughw:0"
 
 #### `glmark` for GPU benchmark testing
 
-    # glmark2-es2-wayland --debug
-
-
-    Special case: PICO-IMX8M and EDM-IMX8M
-
-    We adapt 768MB CMA size For 1GB memory SKu. compatible, so sometimes GPU loading is to heavy cause app hang, we have two ways to fix this issue:
-
-    1. Increase CMA size to 900M (0x3c000000) in dtsi file of kernel source, then re-compile device tree as follows command, then replace old dtb file.
-
-    $ make dtbs
-
-    Note that this way only wokrs on up to 2GB memory size Sku..
-
-    2. Change display resolution less than 1080P in /etc/xdg/weston/weston.ini, then reboot.
-
-#### Run QT5 applications
-
-We support libQT5 relate libraries, you can develop your apps using QT-Creator, and running on Ubuntu directly, or copy executable QT apps from Technexion Yocto 3.0, it also works.
-
-    Example:
-    # root@technexion:/home/ubuntu/QtDemo# ./QtDemo 
-    Using Wayland-EGL
-    Using the 'xdg-shell' shell integration
-
+    $ export DISPLAY=:0.0
+    $ glmark2-es2
 
 #### Control WiFi connection
 
@@ -292,14 +253,24 @@ After reboot, the hotspot already works! the user can connect it via smart phone
 
 #### Control Bluetooth connection
 
-This bluez5 was be tweaked from Technexion for qca modules, so please issue command to enable bluetooth function:
+Step 1. Initial Bluetooth function (root permission)
 
+      PICO-IMX6
+      hciattach -t 30 /dev/ttymxc1 any 115200 flow &
+      EDM-IMX6
+      hciattach -t 30 /dev/ttymxc2 any 115200 flow &
+      PICO-IMX6UL
+      hciattach -t 30 /dev/ttymxc4 any 115200 flow &
+      PICO-IMX7
+      hciattach -t 30 /dev/ttymxc6 any 115200 flow &
 
+      hciconfig hci0 up
 
+Then you'll see a icon at the right-top side of desktop, you can click it and choose relate functions what you want as follows picture.
 
 #### 4G/5GNR mobile connection
 
-
+Network-manager GUI at the right-top side of deskop can help users setting mobile connection easily, remember got right APN name first.
 
 * Tested modules
     * mPCIE
@@ -323,42 +294,21 @@ After flash the ubuntu image to eMMC, you'll see a pop-up window at first boot a
 The system will starting expand rootfs partition and wait for about 10 seconds, it will auto reboot and you can start enjoy your Ubuntu. 
 
 
-#### Weston Keyboard shortcuts
+#### Camera capture
 
-|#|shortcut set|function|
-|---|---|----
-|1|super + s|make a screenshot of the desktop
-|2|super + r|record start/stop a video of the desktop
-|3|super + Tab|swich active windows
+Note that XFCE desktop has GPU acceleretions using IMX6, so please use gstreamer to running camera overview mode as follows:
+  
+    gst-launch-1.0 imxv4l2src device=/dev/video1 ! imxv4l2sink
 
+IMX6ULL/IMX7 has no GPU, so users can use other common camera apps such as 'guvcview' utilities.
 
-#### Chromium
+#### Firefox
 
 |#|method|command|
 |---|---|----
-|1| click icon| no need, icon is exist on left top side of weston desktop
-|2| basic browser| # chromium --no-sandbox --test-type
-|3| kiosk mode (full screen)| # chromium --no-sandbox --test-type --start-fullscreen www.technexion.com
-
-#### Device Tree Overlay
-
-Boot into u-boot prompt, issue commands to enable new function using device tree overlay technology:
-
-    $ setenv dtoverlay '<dtoverlay target name>'
-    $ saveenv
-    $ boot
-
-Support list:
-
-|platform|overlay function|dtoverlay target name|
-|---|---|----
-|EDM-G-IMX8MP| 10" VL10112880 LVDS panel| lvds-vl10112880
-|EDM-G-IMX8MP| 21.5" VL215192108 LVDS panel| lvds-vl215192108
-|PICO-IMX8M| 5" ILI9881C MIPI panel| mipi-dcss-ili9881c
-|EDM-IMX8M| 5" ILI9881C MIPI panel| mipi-dcss-ili9881c
-|EDM-IMX8M| 8" G080UAN01 MIPI panel| mipi-dcss-g080uan01
-|EDM-IMX8M| 10" G101UAN02 MIPI panel| mipi-dcss-g101uan02
-|EDM-IMX8M| MIPI-To-HDMI | mipi2hdmi-adv7535
+|1| click icon| icon is exist on desktop
+|2| basic browser| # firefox
+|3| kiosk mode (full screen)| # firefox --kiosk www.technexion.com
 
 ****
 ### <a name="Apps-Developing"></a> Apps Developing
@@ -395,7 +345,6 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 ### <a name="Known-Limitations"></a>Known Limitations
 -----------
 
-1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
+1. Low speed bluetooth, improve the performance later.
 
-2. This Ubuntu is base on Wayland graphic protocol, so Xorg base app/librareis will be execute invalided, don't spend time to install Xorg relate programs.
 

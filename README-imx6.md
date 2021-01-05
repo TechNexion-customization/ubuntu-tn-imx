@@ -83,6 +83,14 @@ General Packages Installation (Ubuntu 20.04 is recommended)
     Install cross-compiler
     $ sudo apt-get install gcc-arm-linux-gnu
 
+    We strongly recommended install latest qemu package if you're not use Ubuntu 20.04:
+
+    Step 1. Download deb binary file (don't choose incorrect archtecture)
+    https://pkgs.org/search/?q=qemu-user-static
+
+    Step 2. remove your current qemu package
+
+    Step 3. use dpkg tool to install latest deb file
 
 ****
 #### Build a runtime Image

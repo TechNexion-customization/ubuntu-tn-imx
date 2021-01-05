@@ -85,7 +85,15 @@ General Packages Installation (Ubuntu 20.04 is recommended)
     debootstrap qemu-system-arm qemu-user-static libssl-dev
 
     Install cross-compiler
-    $ sudo apt-get install gcc-aarch64-linux-gnu 
+    $ sudo apt-get install gcc-aarch64-linux-gnu
+
+    We strongly recommended install latest qemu package if you're not use Ubuntu 20.04:
+    Step 1. Download deb binary file (don't choose incorrect archtecture)
+    https://pkgs.org/search/?q=qemu-user-static
+
+    Step 2. remove your current qemu package
+
+    Step 3. use dpkg tool to install latest deb file
 
 
 ****

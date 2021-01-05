@@ -268,6 +268,9 @@ Step 1. Initial Bluetooth function (root permission)
 
 Then you'll see a icon at the right-top side of desktop, you can click it and choose relate functions what you want as follows picture.
 
+![bt-1](figures/imx6/bt-1.png)
+
+
 #### 4G/5GNR mobile connection
 
 Network-manager GUI at the right-top side of deskop can help users setting mobile connection easily, remember got right APN name first.

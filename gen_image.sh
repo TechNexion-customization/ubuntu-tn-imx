@@ -47,7 +47,7 @@ elif [[ "$1" == "edm-imx8m" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-edm-wizard-mipi-dcss-g101uan02.dtbo mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-edm-wizard-mipi2hdmi-adv7535.dtbo mnt/
 elif [[ "$1" == "pico-imx8m" ]]; then
-  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mq-pico-pi.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-mipi-dcss-ili9881c.dtbo mnt/
 elif [[ "$1" == "pico-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-pico-pi-qca.dtb mnt/

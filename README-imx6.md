@@ -81,7 +81,7 @@ General Packages Installation (Ubuntu 20.04 is recommended)
     debootstrap qemu-system-arm qemu-user-static libssl-dev
 
     Install cross-compiler
-    $ sudo apt-get install gcc-arm-linux-gnu
+    $ sudo apt-get install gcc-arm-linux-gnueabi
 
     We strongly recommended install latest qemu package if you're not use Ubuntu 20.04:
 
@@ -263,16 +263,20 @@ After reboot, the hotspot already works! the user can connect it via smart phone
 
 Step 1. Initial Bluetooth function (root permission)
 
-      PICO-IMX6
-      hciattach -t 30 /dev/ttymxc1 any 115200 flow &
-      EDM-IMX6
-      hciattach -t 30 /dev/ttymxc2 any 115200 flow &
-      PICO-IMX6UL
-      hciattach -t 30 /dev/ttymxc4 any 115200 flow &
-      PICO-IMX7
-      hciattach -t 30 /dev/ttymxc6 any 115200 flow &
+      Unblock rkill node and permission, only need do once:
+      $ sudo systemctl enable tn_init.service
+      $ sudo systemctl start tn_init.service
 
-      hciconfig hci0 up
+      PICO-IMX6
+      $ sudo hciattach -t 30 /dev/ttymxc1 any 115200 flow &
+      EDM-IMX6
+      $ sudo hciattach -t 30 /dev/ttymxc2 any 115200 flow &
+      PICO-IMX6UL
+      $ sudo hciattach -t 30 /dev/ttymxc4 any 115200 flow &
+      PICO-IMX7
+      $ sudo hciattach -t 30 /dev/ttymxc6 any 115200 flow &
+
+      $ sudo hciconfig hci0 up
 
 Then you'll see a icon at the right-top side of desktop, you can click it and choose relate functions what you want as follows picture.
 

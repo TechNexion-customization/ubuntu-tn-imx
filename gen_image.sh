@@ -3,8 +3,15 @@
 TOP=${PWD}
 
 echo "target: --------------> $1"
-echo "creating 2.9GiB empty image ..."
-sudo dd if=/dev/zero of=test.img bs=1M count=2900
+
+if [[ "$(echo "$1" | grep "imx8")" ]]; then
+  echo "creating 3.8GiB empty image ..."
+  sudo dd if=/dev/zero of=test.img bs=1M count=3800
+else
+  echo "creating 2.9GiB empty image ..."
+  sudo dd if=/dev/zero of=test.img bs=1M count=2900
+fi
+
 echo "created."
 
 sudo kpartx -av test.img
@@ -89,7 +96,7 @@ else
   sudo touch mnt/uEnv.txt
   sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
   if [[ "$(echo "$1" | grep "imx6$")" ]]; then
-    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1920x1080M@60,if=RGB24 video=mxcfb1:dev=ldb,LDB-XGA,if=RGB24 >> mnt/uEnv.txt'
+    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,LDB-XGA,if=RGB24 >> mnt/uEnv.txt'
   fi
   sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
 

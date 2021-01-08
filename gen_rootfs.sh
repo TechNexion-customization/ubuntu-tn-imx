@@ -52,6 +52,9 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/usr/bin/* ${TOP}/rootfs/usr/bin/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/aarch64-linux-gnu/* ${TOP}/rootfs/usr/lib/aarch64-linux-gnu/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/weston ${TOP}/rootfs/usr/lib/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/dri ${TOP}/rootfs/usr/lib/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/gstreamer-1.0 ${TOP}/rootfs/usr/lib/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/libweston-9 ${TOP}/rootfs/usr/lib/
     sudo cp -a ${TOP}/rootfs_overlay/usr/include/* ${TOP}/rootfs/usr/include/
     sudo cp -a ${TOP}/rootfs_overlay/usr/share/* ${TOP}/rootfs/usr/share/
     sudo cp -a ${TOP}/rootfs_overlay/usr/libexec/* ${TOP}/rootfs/usr/libexec/

@@ -78,6 +78,7 @@ yes "Y" | apt install libdc1394-22 libmodplug1 libsoup2.4-1 librsvg2-2 libopenmp
 yes "Y" | apt install libde265-0 libmms0 libmjpegutils-2.1-0 libvo-amrwbenc0 libwildmidi2 libmpeg2encpp-2.1-0 libvisual-0.4-0 libsrt1 libtag1-dev libcaca0 libavfilter7
 yes "Y" | apt install libcodec2-0.9 libxdamage1 libshout3 libchromaprint1 libusrsctp1 libjack0 libsbc1 libmplex2-2.1-0 libavc1394-0 libsoundtouch1 libfluidsynth2 libshout3 libdca0
 yes "Y" | apt install libofa0 libsrtp2-1 libdv4 libkate1 libwebrtc-audio-processing1 libaa1 libnice10 libcurl4-gnutls-dev libdvdnav4 libiec61883-0 libgraphene-1.0-0 libspandsp2 libfaad2
+yes "Y" | apt install libcurl4 libatk1.0-0 libatk-bridge2.0-0
 
 
 # dpkg install latest network-manager and modem-manager for 5gnr module
@@ -102,6 +103,7 @@ dpkg -i /opt/deb/5gnr/nm/network-manager_1.26.2-1ubuntu1_arm64.deb
 sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
+sudo systemctl enable bluetooth
 
 # disable qca bluetooth service when boot (for users manually)
 sudo systemctl disable serial-qcabtfw

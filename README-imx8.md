@@ -41,7 +41,7 @@ We recommended adapt ubuntu user as normal use, and adapt root user to do deveop
 
 Features:
 * LTS version until 2025/04
-* Weston Desktop with GPU accelelation v6.0
+* Weston Desktop with GPU accelelation v9.0
 * Wayland compositor v1.18.0
 * gstreamer1.0 v1.16.2
 * VPU libraries v1.18
@@ -50,6 +50,7 @@ Features:
 * openGL with GPU accelelation
 * docker container v19.03.8
 * Swap parition implementation using zram
+* eIQ supporting
 
 ****
 ### <a name="Build-Image"></a>Build Ubuntu Image
@@ -478,6 +479,56 @@ QT example (coming soon)
 
 We recommended developing GUI applications on host PC side, it's saving eMMC usage for develop libraries especially huge HMI system, so Technexion will provide a Graphic SDK for host PC side use soon.
 
+**2. eIQ Enabling**
+
+The NXP® eIQ machine learning software development environment enables the use of ML algorithms on NXP MCUs, i.MX RT crossover MCUs, and i.MX family SoCs.
+It support three ML frameworks as follows:
+
+|#|Framework|Methods|
+|---|---|----
+|1|Tensorflow Lite|CPU,GPU,NPU
+|2|ARMNN|CPU,GPU,NPU
+|3|OpenCV|CPU
+
+Installation steps:
+
+    1. Install pip3 and relate libraries
+    $ sudo apt install python3-pip python3-pil
+    $ pip3 install wheel
+
+    2. Install opencv
+    $ pip3 install opencv-python
+
+    3. Install armnn
+    $ sudo apt install software-properties-common
+    $ sudo add-apt-repository ppa:armnn/ppa
+    $ sudo apt update
+    $ sudo apt install libarmnn-aclcommon22_20.08-4
+    $ sudo apt install libarmnn-cpuacc-backend22_20.08-4
+    $ sudo apt install libarmnn-cpuref-backend22_20.08-4
+    $ sudo apt install libarmnn-gpuacc-backend22_20.08-4
+    $ sudo apt install libarmnn-tfliteparser22_20.08-4
+    $ sudo apt install libarmnn22_20.08-4
+    $ sudo apt install python3-pyarmnn_20.08-4
+
+    4. Install tensorflow-lite
+    $ pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp38-cp38-linux_aarch64.whl
+
+    5. Install pyeiq
+    $ git clone https://source.codeaurora.org/external/imxsupport/pyeiq && cd pyeiq/
+    $ git checkout tag_v2.2.0
+    $ python3 setup.py sdist
+    $ cd dist
+    $ tar zxvf eiq-2.2.0.tar.gz
+    $ cd eiq-2.2.0
+    $ sudo python3 setup.py install
+
+    Run an object detection example
+    $ pyeiq --run switch_image
+
+<img src="figures/eiq-1.png" width="800">
+
+Note that due to NXP's pyeiq latest version is v2.2.0, but it still base on old kernel, so some functions could be not working such as GPU,NPU acceleration. So this version just an alpha version, we'll update eiq libraries soon when NXP announce new version.
 
 ****
 ### <a name="Known-Limitations"></a>Known Limitations
@@ -486,3 +537,4 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
 
 2. This Ubuntu is base on Wayland graphic protocol, so Xorg base app/librareis will be execute invalided, don't spend time to install Xorg relate programs.
+

@@ -22,6 +22,7 @@ IMX8 Platforms for Ubuntu 20.04 with Wayland Framework
     * Weston Keyboard shortcuts
     * Chromium
     * Device Tree Overlay
+    * OpenCV 4.4 dnn demo
 
 * [Apps Developing](#Apps-Developing)
 * [Known Limitations](#Known-issues)
@@ -51,6 +52,7 @@ Features:
 * docker container v19.03.8
 * Swap parition implementation using zram
 * eIQ supporting
+* OpenCV 4.4 plugin with dnn module
 
 ****
 ### <a name="Build-Image"></a>Build Ubuntu Image
@@ -438,6 +440,34 @@ Support list:
 |EDM-IMX8M| 10" G101UAN02 MIPI panel| mipi-dcss-g101uan02
 |EDM-IMX8M| MIPI-To-HDMI | mipi2hdmi-adv7535
 
+#### OpenCV 4.4 dnn demo
+
+ Installation Steps
+
+      1. Download plugin tar file
+      $ wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/tn_opencv_plugin_installer.tar.gz
+      $ tar zxvf tn_opencv_plugin_installer.tar.gz
+
+      2. Running installation script
+      $  chmod a+x ./opencv_installer.sh
+      $  ./opencv_installer.sh
+
+      3. remove plugin installer files
+      $ rm -rf tn_opencv_plugin_installer.tar.gz opencv_installer.sh opencv
+
+Running a machine learning demo using caffe2 + ResNet-18 model for cifar-10 classification case (must be adapt python 3.7)
+
+      1. Download demo code
+      $ git clone https://github.com/TechNexion-customization/tn-ml.git
+      $ cd tn-ml
+      $ sudo -E python3.7 ./cifar_classifier.py -p models/resnet18_emdnn/resnet18_emdnn.prototxt -m models/resnet18_emdnn/resnet18_emdnn.caffemodel
+
+As you can see, the output image will be labeled which is AI's inference results.
+The users can change input pictures, or modify source code for your applications using our demo code :)
+
+<img src="figures/opencv-1.png" width="800">
+
+
 ****
 ### <a name="Apps-Developing"></a> Apps Developing
 -----------
@@ -537,4 +567,5 @@ Note that due to NXP's pyeiq latest version is v2.2.0, but it still base on old 
 1. Our Ubunut does support HW acceleration on Wayland, it means our weston, Wayland, QT5 and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get, it will install no HW acceleration library without tweaked from Ubuntu package management server.
 
 2. This Ubuntu is base on Wayland graphic protocol, so Xorg base app/librareis will be execute invalided, don't spend time to install Xorg relate programs.
+
 

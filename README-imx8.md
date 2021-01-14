@@ -22,7 +22,7 @@ IMX8 Platforms for Ubuntu 20.04 with Wayland Framework
     * Weston Keyboard shortcuts
     * Chromium
     * Device Tree Overlay
-    * OpenCV 4.4 dnn demo
+    * OpenCV 4.4 SDK
 
 * [Apps Developing](#Apps-Developing)
 * [Known Limitations](#Known-issues)
@@ -440,26 +440,28 @@ Support list:
 |EDM-IMX8M| 10" G101UAN02 MIPI panel| mipi-dcss-g101uan02
 |EDM-IMX8M| MIPI-To-HDMI | mipi2hdmi-adv7535
 
-#### OpenCV 4.4 dnn demo
+#### OpenCV 4.4 SDK
 
  Installation Steps
 
-      1. Download plugin tar file
-      $ wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/tn_opencv_plugin_installer.tar.gz
-      $ tar zxvf tn_opencv_plugin_installer.tar.gz
+      1. Download compressed tar file of SDK
+      $ wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/tn_opencv4.4_sdk_installer.tar.gz
+      $ tar zxvf tn_opencv4.4_sdk_installer.tar.gz
 
       2. Running installation script
       $  chmod a+x ./opencv_installer.sh
       $  ./opencv_installer.sh
 
-      3. remove plugin installer files
-      $ rm -rf tn_opencv_plugin_installer.tar.gz opencv_installer.sh opencv
+      3. remove SDK installer relate files
+      $ rm -rf tn_opencv4.4_sdk_installer.tar.gz opencv_installer.sh opencv
 
-Running a machine learning demo using caffe2 + ResNet-18 model for cifar-10 classification case (must be adapt python 3.7)
+Running a machine learning demo using caffe2 and ResNet-18 model for cifar-10 classification case (must be adapt python 3.7)
 
       1. Download demo code
       $ git clone https://github.com/TechNexion-customization/tn-ml.git
       $ cd tn-ml
+
+      2. Run example code using specific resnet18-emdnn model
       $ sudo -E python3.7 ./cifar_classifier.py -p models/resnet18_emdnn/resnet18_emdnn.prototxt -m models/resnet18_emdnn/resnet18_emdnn.caffemodel
 
 As you can see, the output image will be labeled which is AI's inference results.

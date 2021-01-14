@@ -11,6 +11,8 @@ KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_CO
 
 ifeq ($(PLATFORM),pico-imx8mm)
 KERNEL_DEFCONFIG := tn_imx8_defconfig
+else ifeq ($(PLATFORM),edm-g-imx8mm)
+KERNEL_DEFCONFIG := tn_imx8_defconfig
 else ifeq ($(PLATFORM),axon-e-imx8mp)
 KERNEL_DEFCONFIG := tn_imx8_defconfig
 else ifeq ($(PLATFORM),edm-g-imx8mp)

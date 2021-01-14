@@ -43,6 +43,10 @@ ifeq ($(PLATFORM),pico-imx8mm)
 	$(eval UBOOT_DEFCONFIG := pico-imx8mm_defconfig)
 	$(eval ATF_OPTION := imx8mm-pico-pi)
 	@sed -i 's/imx8mm-pico-pi.dtb/imx8mm-pico-pi-ili9881c.dtb/' $(UBOOT_DIR)/u-boot-tn-imx/configs/pico-imx8mm_defconfig;
+else ifeq ($(PLATFORM),edm-g-imx8mm)
+	$(eval UBOOT_DEFCONFIG := edm-g-imx8mm_defconfig)
+	$(eval ATF_OPTION := imx8mm-pico-pi)
+	@sed -i 's/imx8mm-edm-g-wb.dtb/imx8mm-edm-g-wb-sn65dsi84-vl10112880.dtb/' $(UBOOT_DIR)/u-boot-tn-imx/configs/edm-g-imx8mm_defconfig;
 else ifeq ($(PLATFORM),axon-e-imx8mp)
 	$(eval UBOOT_DEFCONFIG := axon-imx8mp_defconfig)
 	$(eval ATF_OPTION := imx8mp-axon)

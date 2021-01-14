@@ -18,7 +18,7 @@ build-rootfs: src
 ifeq ($(PLATFORM),pico-imx8mm)
 	$(eval TARGET := pico-imx8mm)
 else ifeq ($(PLATFORM),axon-e-imx8mp)
-	$(eval TARGET := axon-imx8mp)
+	$(eval TARGET := axon-e-imx8mp)
 else ifeq ($(PLATFORM),edm-g-imx8mp)
 	$(eval TARGET := edm-g-imx8mp)
 else ifeq ($(PLATFORM),edm-imx8m)

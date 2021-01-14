@@ -455,7 +455,7 @@ Support list:
       3. remove SDK installer relate files
       $ rm -rf tn_opencv4.4_sdk_installer.tar.gz opencv_installer.sh opencv
 
-Running a machine learning demo using caffe2 and ResNet-18 model for cifar-10 classification case (must be adapt python 3.7)
+Running a machine learning demo using caffe2 and ResNet-18 model for cifar-10 classification case (must adapt python 3.7)
 
       1. Download demo code
       $ git clone https://github.com/TechNexion-customization/tn-ml.git
@@ -465,7 +465,7 @@ Running a machine learning demo using caffe2 and ResNet-18 model for cifar-10 cl
       $ sudo -E python3.7 ./cifar_classifier.py -p models/resnet18_emdnn/resnet18_emdnn.prototxt -m models/resnet18_emdnn/resnet18_emdnn.caffemodel
 
 As you can see, the output image will be labeled which is AI's inference results.
-The users can change input pictures, or modify source code for your applications using our demo code :)
+The users can change input pictures, or modify source code for user's applications using our demo code :)
 
 <img src="figures/opencv-1.png" width="800">
 

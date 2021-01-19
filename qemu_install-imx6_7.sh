@@ -214,6 +214,8 @@ sudo ln -sn /usr/lib/arm-linux-gnueabihf/gstreamer-1.0 /usr/lib/gstreamer-1.0
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/dri /usr/lib/dri
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/imx-mm /usr/lib/imx-mm
 
+# remove bug existing applications
+rm -rf /usr/share/applications/xfce-display-settings.desktop
 
 mkdir -p /lib/modules/
 

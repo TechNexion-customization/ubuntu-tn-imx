@@ -365,4 +365,15 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 
 1. Low speed bluetooth, improve the performance later.
 
+2. Manual change PICO-IMX6 boot arguments in uEnv.txt using our Ubuntu BSP
+
+   We adpat NYMPH baseboard with HDMI as dafault PICO-IMX6 configuration in Makefile, please change the relate argument if you use other baseboard.
+
+    Modify baseboard in line 101 of gen_image.sh, for example, if your baseboard is PI, please modify it as follows:
+    sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
+
+    Modify resolution according to your target panel (IMX6 only), modify line 103 of gen_image.sh as follows:
+    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+
+    That is a 5" LCD example.
 

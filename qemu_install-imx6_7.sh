@@ -154,6 +154,8 @@ if [ "\$ROOTFS_SIZE" -lt 3 ]; then
   (echo "d"; echo "3"; echo "d"; echo "2"; echo "n"; echo "p"; echo "2"; echo "81920"; echo; echo "w") | sudo fdisk /dev/"\$MMC_DEV"
   sudo resize2fs /dev/"\$MMC_DEV"p2
   sync
+
+  sudo systemctl enable tn_init.service
   sleep 2
 
   sudo reboot
@@ -164,6 +166,9 @@ xset dpms 0 0 0
 xset -dpms s off
 
 blueman-applet &
+sleep 7
+sudo rfkill unblock 0
+sudo rfkill unblock 1
 
 END
 
@@ -184,7 +189,6 @@ yes "Y" | apt install --reinstall network-manager
 sudo systemctl daemon-reload
 #sudo systemctl disable getty@tty1.service
 sudo chmod a+x /usr/bin/system_init
-sudo systemctl enable tn_init.service
 
 # disable qca bluetooth service when boot (for users manually)
 #sudo systemctl disable serial-qcabtfw

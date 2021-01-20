@@ -261,11 +261,7 @@ After reboot, the hotspot already works! the user can connect it via smart phone
 
 #### Control Bluetooth connection
 
-Step 1. Initial Bluetooth function (root permission)
-
-      Unblock rkill node and permission, only need do once:
-      $ sudo systemctl enable tn_init.service
-      $ sudo systemctl start tn_init.service
+Step 1. Initial Bluetooth function include BLE (Bluetooth Low Energy) part which need root permission
 
       PICO-IMX6
       $ sudo hciattach -t 30 /dev/ttymxc1 any 115200 flow &
@@ -276,7 +272,14 @@ Step 1. Initial Bluetooth function (root permission)
       PICO-IMX7
       $ sudo hciattach -t 30 /dev/ttymxc6 any 115200 flow &
 
+      Unblock rkill node:
+      $ sudo rfkill unblock 2
+
+      reset hci interface once
       $ sudo hciconfig hci0 up
+      $ sudo hciconfig hci0 down
+      $ sudo hciconfig hci0 up
+
 
 Then you'll see a icon at the right-top side of desktop, you can click it and choose relate functions what you want as follows picture.
 

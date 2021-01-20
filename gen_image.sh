@@ -94,9 +94,16 @@ else
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot.img mnt
 
   sudo touch mnt/uEnv.txt
-  sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
   if [[ "$(echo "$1" | grep "imx6$")" ]]; then
-    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24 video=mxcfb1:dev=ldb,LDB-XGA,if=RGB24 >> mnt/uEnv.txt'
+    if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
+      sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
+    else
+      sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
+    fi
+    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+  else
+    sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
+    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
   fi
   sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
 

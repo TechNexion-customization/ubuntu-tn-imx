@@ -166,7 +166,7 @@ xset dpms 0 0 0
 xset -dpms s off
 
 blueman-applet &
-sleep 7
+sleep 10
 sudo rfkill unblock 0
 sudo rfkill unblock 1
 

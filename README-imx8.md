@@ -23,6 +23,8 @@ IMX8 Platforms for Ubuntu 20.04 with Wayland Framework
     * Chromium
     * Device Tree Overlay
     * OpenCV 4.4 SDK
+    * TensorFlow-Lite 2.2.0 SDK
+
 
 * [Apps Developing](#Apps-Developing)
 * [Known Limitations](#Known-issues)
@@ -52,7 +54,8 @@ Features:
 * docker container v19.03.8
 * Swap parition implementation using zram
 * eIQ supporting
-* OpenCV 4.4 plugin with dnn module
+* OpenCV 4.4 SDK with dnn module
+* TensorFlow-Lite 2.2.0 SDK with NPU support
 
 ****
 ### <a name="Build-Image"></a>Build Ubuntu Image
@@ -465,6 +468,54 @@ Running a machine learning demo using caffe2 and ResNet-18 model for cifar-10 cl
       $ sudo -E python3.7 ./cifar_classifier.py -p models/resnet18_emdnn/resnet18_emdnn.prototxt -m models/resnet18_emdnn/resnet18_emdnn.caffemodel
 
 As you can see, the output image will be labeled which is AI's inference results.
+The users can change input pictures, or modify source code for user's applications using our demo code :)
+
+<img src="figures/opencv-1.png" width="800">
+
+#### TensorFlow-Lite 2.2.0 SDK
+
+ Installation Steps
+
+      1. Download compressed tar file of SDK
+      $ wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/tn_tflite2.2.0_sdk_installer.tar.gz
+      $ tar zxvf tn_tflite2.2.0_sdk_installer.tar.gz
+
+      2. Running installation script
+      $  chmod a+x ./tflite_installer.sh
+      $  ./tflite_installer.sh
+
+      3. remove SDK installer relate files
+      $ rm -rf tn_tflite2.2.0_sdk_installer.tar.gz tflite_installer.sh tflite
+
+Running a machine learning demo using NNAPI and mobilenet model for NPU classification case (must adapt python 3.7)
+
+      1. change to demo directory
+      $ cd /usr/bin/tensorflow-lite-2.2.0/examples
+
+      2. Benchmark testing
+
+      CPU
+      $ ./benchmark_model --graph=mobilenet_v1_1.0_224_quant.tflite
+      Average inference timings in us: Warmup: 142661, Init: 9292, Inference: 141421
+
+      NPU
+      $ ./benchmark_model --graph=mobilenet_v1_1.0_224_quant.tflite --use_nnapi=true
+      Average inference timings in us: Warmup: 6.15961e+06, Init: 23053, Inference: 2669.4
+
+      3. Image classification using mobilenet model with NPU accelaration
+      $ python3.7 label_image.pNFO: Created TensorFlow Lite delegate for NNAPI.
+      Applied NNAPI delegate.
+      Warm-up time: 6142.1 ms
+
+      Inference time: 2.9 ms
+
+      0.670588: military uniform
+      0.125490: Windsor tie
+      0.039216: bow tie
+      0.027451: mortarboard
+      0.023529: bulletproof vest
+
+As you can see, the output messages will be labeled which is AI's inference results.
 The users can change input pictures, or modify source code for user's applications using our demo code :)
 
 <img src="figures/opencv-1.png" width="800">

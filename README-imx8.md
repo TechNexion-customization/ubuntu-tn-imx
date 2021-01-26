@@ -503,7 +503,8 @@ Running a machine learning demo using NNAPI and mobilenet model for NPU classifi
       Average inference timings in us: Warmup: 6.15961e+06, Init: 23053, Inference: 2669.4
 
       3. Image classification using mobilenet model with NPU accelaration
-      $ python3.7 label_image.pNFO: Created TensorFlow Lite delegate for NNAPI.
+      $ python3.7 label_image.py
+      INFO: Created TensorFlow Lite delegate for NNAPI.
       Applied NNAPI delegate.
       Warm-up time: 6142.1 ms
 
@@ -515,11 +516,8 @@ Running a machine learning demo using NNAPI and mobilenet model for NPU classifi
       0.027451: mortarboard
       0.023529: bulletproof vest
 
-As you can see, the output messages will be labeled which is AI's inference results.
+The output messages will showing posibilities which is AI's inference results.
 The users can change input pictures, or modify source code for user's applications using our demo code :)
-
-<img src="figures/opencv-1.png" width="800">
-
 
 ****
 ### <a name="Apps-Developing"></a> Apps Developing

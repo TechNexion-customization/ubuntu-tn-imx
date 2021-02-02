@@ -81,15 +81,15 @@ endif
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx -j$(CPUS) all
 
 ifeq ($(PLATFORM),pico-imx8mm)
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION).dtb -d /dev/null > /dev/null; cd -
 else ifeq ($(PLATFORM),axon-e-imx8mp)
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION).dtb -d /dev/null > /dev/null; cd -
 else ifeq ($(PLATFORM),edm-g-imx8mp)
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION).dtb -d /dev/null > /dev/null; cd -
 else ifeq ($(PLATFORM),edm-imx8m)
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION).dtb -d /dev/null > /dev/null; cd -
 else ifeq ($(PLATFORM),pico-imx8m)
-	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION) -d /dev/null > /dev/null; cd -
+	cd $(UBOOT_DIR)/u-boot-tn-imx; yes | ARCH=$(ARCH) CROSS_COMPILE=$(CC) ./install_uboot_imx8.sh -b $(ATF_OPTION).dtb -d /dev/null > /dev/null; cd -
 endif
 
 src:

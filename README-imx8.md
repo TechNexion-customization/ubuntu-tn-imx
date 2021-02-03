@@ -296,7 +296,9 @@ Ubuntu adapt network-manager service to manage network status, so please use `nm
 
 This bluez5 was be tweaked from Technexion for qca modules, so please issue command to enable bluetooth function:
 
-    $ sudo systemctl start serial-qcabtfw@ttymxc0 (wait for 5 seconds)
+    $ sudo systemctl start serial-qcabtfw@ttymxc0 (wait for 5 seconds, checking /etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc<x>.service for your ttymxc number)
+    $ sudo systemctl enable bluetooth
+
     $ hciconfig
     hci0:   Type: Primary  Bus: UART
     BD Address: 00:1F:7B:31:3D:31  ACL MTU: 1024:7  SCO MTU: 60:8

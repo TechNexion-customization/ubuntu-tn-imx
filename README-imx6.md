@@ -377,3 +377,6 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 
     That is a 5" LCD example.
 
+3. Our Ubunut does support HW acceleration on X11 for IMX6 platforms, it means our openGL, and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get especially apt-get upgrade system, it will install no HW acceleration library without tweaked from Ubuntu package management server.
+
+4. In PICO-IMX6 platforms, GPU with HW acceleration on X11 has a little bit unstable when quick window on XFCE desktop frequently, don't do that if possible.

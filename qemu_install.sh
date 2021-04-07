@@ -112,10 +112,10 @@ dpkg -i /opt/deb/5gnr/nm/network-manager_1.26.2-1ubuntu1_arm64.deb
 sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service
-sudo systemctl enable bluetooth
 
-# disable qca bluetooth service when boot (for users manually)
 sudo systemctl disable serial-qcabtfw
+sudo systemctl disable bluetooth
+
 
 # let network-manager handle all network interfaces
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

@@ -8,6 +8,7 @@ echo "${COL_GREEN}creating ubuntu sudoer account...${COL_NORMAL}"
 cd /
 echo technexion > /etc/hostname
 echo -e "127.0.1.1\ttechnexion" >> /etc/hosts
+echo -e "nameserver\t8.8.8.8" >> /etc/hosts
 
 (echo "root"; echo "root";) | passwd
 (echo "ubuntu"; echo "ubuntu"; echo;) | adduser ubuntu

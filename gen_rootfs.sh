@@ -205,6 +205,11 @@ gen_pure_rootfs() {
 
     echo "done copy GPU libraries copying"
 
+    echo "Start copy tweaked bt libraries copying"
+    sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/bin/* ${TOP}/rootfs/usr/bin/
+    sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    echo "done copy tweaked bt libraries copying"
+
     # tn service
     sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/tn_init.service ${TOP}/rootfs/etc/systemd/system/
     sudo cp -a ${TOP}/rootfs_overlay/usr/bin/system_init ${TOP}/rootfs/usr/bin/system_init

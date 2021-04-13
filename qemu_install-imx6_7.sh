@@ -154,7 +154,7 @@ if [ "\$ROOTFS_SIZE" -lt 3 ]; then
 
   sleep 5
 
-  feh -x -Z /etc/xdg/tn-standby.jpg &
+  feh -x -F -Z /etc/xdg/tn-standby.jpg &
   sleep 5
   yes "Y" | sudo apt-get install xfce4
   sync

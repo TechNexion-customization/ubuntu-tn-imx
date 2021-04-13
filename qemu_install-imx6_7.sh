@@ -176,9 +176,12 @@ xset dpms 0 0 0
 xset -dpms s off
 
 blueman-applet &
-sleep 10
+sleep 3
 sudo rfkill unblock 0
 sudo rfkill unblock 1
+sudo hciconfig hci0 up
+sync
+sudo systemctl start bluetooth
 
 END
 
@@ -200,8 +203,8 @@ sudo systemctl daemon-reload
 #sudo systemctl disable getty@tty1.service
 sudo chmod a+x /usr/bin/system_init
 
-# disable qca bluetooth service when boot (for users manually)
-#sudo systemctl disable serial-qcabtfw
+# disable qca bluetooth service when boot
+sudo systemctl disable bluetooth
 
 # let network-manager handle all network interfaces
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

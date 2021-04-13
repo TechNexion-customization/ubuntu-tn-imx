@@ -218,10 +218,12 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/etc/X11/xorg.conf ${TOP}/rootfs/etc/X11/xorg.conf
 
   elif [[ $(echo $1 | grep "imx7d$") ]] || [[ $(echo $1 | grep "imx6ull$") ]]; then
-    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
+    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4-imx7/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
   fi
 
-  if [[ $(echo $1 | grep "imx6") ]] || [[ $(echo $1 | grep "imx7d") ]]; then
+  if [[ $(echo $1 | grep "imx6") ]]; then
+    sudo mkdir -p ${TOP}/rootfs/home/ubuntu/.config/xfce4
+    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4-imx6/* ${TOP}/rootfs/home/ubuntu/.config/xfce4/*
     sudo cp -a ${TOP}/rootfs_overlay/etc/slim.conf ${TOP}/rootfs/etc/slim.conf
     sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.fluxbox/startup ${TOP}/rootfs/home/ubuntu/.fluxbox/startup
     sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-standby.jpg ${TOP}/rootfs/etc/xdg/tn-standby.jpg

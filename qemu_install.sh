@@ -110,6 +110,9 @@ dpkg -i /opt/deb/5gnr/nm/libnm0_1.26.2-1ubuntu1_arm64.deb
 dpkg -i /opt/deb/5gnr/nm/libteamdctl0_1.31-1_arm64.deb
 dpkg -i /opt/deb/5gnr/nm/network-manager_1.26.2-1ubuntu1_arm64.deb
 
+# tn nfc
+dpkg -i /opt/deb/nfc/tn-nfc_1.0.0-0.1_arm64.deb
+
 sudo systemctl daemon-reload
 sudo systemctl disable getty@tty1.service
 sudo systemctl enable rc-local.service

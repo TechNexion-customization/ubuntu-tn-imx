@@ -261,27 +261,9 @@ After reboot, the hotspot already works! the user can connect it via smart phone
 
 #### Control Bluetooth connection
 
-Step 1. Initial Bluetooth function include BLE (Bluetooth Low Energy) part which need root permission
+Bluetooth will auto initial Bluetooth function include BLE (Bluetooth Low Energy) part which need root permission
 
-      PICO-IMX6
-      $ sudo hciattach -t 30 /dev/ttymxc1 any 115200 flow &
-      EDM-IMX6
-      $ sudo hciattach -t 30 /dev/ttymxc2 any 115200 flow &
-      PICO-IMX6UL
-      $ sudo hciattach -t 30 /dev/ttymxc4 any 115200 flow &
-      PICO-IMX7
-      $ sudo hciattach -t 30 /dev/ttymxc6 any 115200 flow &
-
-      Unblock rkill node:
-      $ sudo rfkill unblock 2
-
-      reset hci interface once
-      $ sudo hciconfig hci0 up
-      $ sudo hciconfig hci0 down
-      $ sudo hciconfig hci0 up
-
-
-Then you'll see a icon at the right-top side of desktop, you can click it and choose relate functions what you want as follows picture.
+Then you'll see a icon at the right-top side of desktop (blueman GUI), you can click it and choose relate functions what you want as follows picture, note that you have to close blueman if you want to use other tools to avoid conflictly.
 
 ![bt-1](figures/imx6/bt-1.png)
 
@@ -363,9 +345,7 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 ### <a name="Known-Limitations"></a>Known Limitations
 -----------
 
-1. Low speed bluetooth, improve the performance later.
-
-2. Manual change PICO-IMX6 boot arguments in uEnv.txt using our Ubuntu BSP
+1. Manual change PICO-IMX6 boot arguments in uEnv.txt using our Ubuntu BSP
 
    We adpat NYMPH baseboard with HDMI as dafault PICO-IMX6 configuration in Makefile, please change the relate argument if you use other baseboard.
 
@@ -377,6 +357,6 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 
     That is a 5" LCD example.
 
-3. Our Ubunut does support HW acceleration on X11 for IMX6 platforms, it means our openGL, and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get especially apt-get upgrade system, it will install no HW acceleration library without tweaked from Ubuntu package management server.
+2. Our Ubunut does support HW acceleration on X11 for IMX6 platforms, it means our openGL, and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get especially apt-get upgrade system, it will install no HW acceleration library without tweaked from Ubuntu package management server.
 
-4. In PICO-IMX6 platforms, GPU with HW acceleration on X11 has a little bit unstable when quick window on XFCE desktop frequently, don't do that if possible.
+3. In PICO-IMX6 platforms, GPU with HW acceleration on X11 has a little bit unstable when quick window on XFCE desktop frequently, don't do that if possible.

@@ -294,10 +294,7 @@ Ubuntu adapt network-manager service to manage network status, so please use `nm
 
 #### Control Bluetooth connection using `bluez5`
 
-This bluez5 was be tweaked from Technexion for qca modules, so please issue command to enable bluetooth function:
-
-    $ sudo systemctl start serial-qcabtfw@ttymxc0 (wait for 5 seconds, checking /etc/systemd/system/multi-user.target.wants/serial-qcabtfw@ttymxc<x>.service for your ttymxc number)
-    $ sudo systemctl enable bluetooth
+Bluetooth function will auto start by default setting, issue command to checking hci0 interface is exist or not.
 
     $ hciconfig
     hci0:   Type: Primary  Bus: UART
@@ -306,6 +303,9 @@ This bluez5 was be tweaked from Technexion for qca modules, so please issue comm
     RX bytes:672 acl:0 sco:0 events:36 errors:0
     TX bytes:431 acl:0 sco:0 commands:36 errors:0
 
+    $ hciconfig hci0 up (enabling hci0)
+
+Now, you can start program your bluetooth applications, or use existed utilities to do testing such as bluetoothctl, hcitool, gatttool.
 
 #### 4G/5GNR mobile connection using `mmcli` and `qmicli`
 

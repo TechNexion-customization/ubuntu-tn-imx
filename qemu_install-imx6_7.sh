@@ -34,12 +34,12 @@ yes "Y" | apt install bash-completion ifupdown resolvconf alsa-utils gpiod cloud
 
 
 #install docker-ce
-yes "Y" | apt install gnupg apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/ubuntu focal stable"
-yes "Y" | apt-get update
-apt-cache policy docker-ce
-yes "Y" | apt install docker-ce
+#yes "Y" | apt install gnupg apt-transport-https ca-certificates curl software-properties-common
+#curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#sudo add-apt-repository "deb [arch=armhf] https://download.docker.com/linux/ubuntu bionic stable"
+#yes "Y" | apt-get update
+#apt-cache policy docker-ce
+#yes "Y" | apt install docker-ce
 
 # audio setting
 cat <<END > /home/ubuntu/.asoundrc

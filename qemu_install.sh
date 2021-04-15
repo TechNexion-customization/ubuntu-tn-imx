@@ -120,6 +120,9 @@ sudo systemctl enable rc-local.service
 sudo systemctl disable serial-qcabtfw
 sudo systemctl disable bluetooth
 
+# disable initail failed relate services
+sudo systemctl disable hostapd.service
+sudo systemctl disable dnsmasq.service
 
 # let network-manager handle all network interfaces
 touch /etc/NetworkManager/conf.d/10-globally-managed-devices.conf

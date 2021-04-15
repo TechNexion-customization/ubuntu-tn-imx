@@ -16,7 +16,7 @@ IMX6/IMX7 Platforms for Ubuntu 20.04 with X11 Framework
     * Control WiFi connection
     * Control Bluetooth connection
     * 4G/5GNR mobile connection
-    * Docker conatiner
+    * Docker conatiner (4/15 removed temporary)
     * Expand rootfs partition
     * Firefox
 
@@ -44,7 +44,6 @@ Features:
 * VPU libraries v6.4.3
 * apt-get package manager
 * openGL with GPU accelelation v6.4.3
-* docker container v19.03.8
 * Swap parition implementation using zram
 
 ****
@@ -280,9 +279,6 @@ Network-manager GUI at the right-top side of deskop can help users setting mobil
         * TELIT LN930 (4G)
         * SIERRA EM7430 (4G)
 
-#### Docker conatiner
-
-For OS virtualization requirement, we enable docker engine in Ubuntu, the users can use docker commands to pull exist containers from dockerhub, of course it can build in Ubuntu using dockerfile, note that you have to choose aarch64 strcuture base container.
 
 
 #### Expand rootfs partition
@@ -342,7 +338,7 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 
 
 ****
-### <a name="Known-Limitations"></a>Known Limitations
+ ### <a name="Known-Limitations"></a>Known Limitations
 -----------
 
 1. Manual change PICO-IMX6 boot arguments in uEnv.txt using our Ubuntu BSP
@@ -360,3 +356,5 @@ We recommended developing GUI applications on host PC side, it's saving eMMC usa
 2. Our Ubunut does support HW acceleration on X11 for IMX6 platforms, it means our openGL, and gstreamer-1.0 relate libraries all tweaked already, so please don't remove them and re-install same package via apt-get especially apt-get upgrade system, it will install no HW acceleration library without tweaked from Ubuntu package management server.
 
 3. In PICO-IMX6 platforms, GPU with HW acceleration on X11 has a little bit unstable when quick window on XFCE desktop frequently, don't do that if possible.
+
+4. Docker engine was be removed temporary because of current docker-ce packages was broken from docker official site (only armhf has this issue).

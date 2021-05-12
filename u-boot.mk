@@ -6,15 +6,15 @@
 include common.mk
 
 ifeq ($(PLATFORM),pico-imx8mm)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
 else ifeq ($(PLATFORM),axon-e-imx8mp)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
 else ifeq ($(PLATFORM),edm-g-imx8mp)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
 else ifeq ($(PLATFORM),edm-imx8m)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
 else ifeq ($(PLATFORM),pico-imx8m)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-next
+UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
 else ifeq ($(PLATFORM),pico-imx6)
 UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
 else ifeq ($(PLATFORM),edm-imx6)

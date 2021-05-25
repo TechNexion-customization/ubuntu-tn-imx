@@ -16,7 +16,7 @@ gen_pure_rootfs() {
   fi
 
   if [ ! -d rootfs_overlay ] ; then
-    wget -c -t 0 --timeout=60 --waitretry=60 ftp://ftp.technexion.net/development_resources/NXP/ubuntu/proprietary/"$proprietary"-focol-proprietary.tar.gz
+    wget -c -t 0 --timeout=60 --waitretry=60 https://download.technexion.com/development_resources/NXP/ubuntu/proprietary/"$proprietary"-focol-proprietary.tar.gz
     tar zxvf "$proprietary"-focol-proprietary.tar.gz
     rm ./"$proprietary"-focol-proprietary.tar.gz
   fi

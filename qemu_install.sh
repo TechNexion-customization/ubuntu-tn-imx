@@ -29,7 +29,7 @@ yes "Y" | sudo apt-get update
 yes "Y" | sudo apt-get upgrade
 yes "Y" | sudo apt --fix-broken install
 yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils usbutils
-yes "Y" | apt install bash-completion ifupdown resolvconf alsa-utils gpiod cloud-utils libpolkit-agent-1-0 libpolkit-gobject-1-0 policykit-1 udhcpc
+yes "Y" | apt install bash-completion ifupdown resolvconf alsa-utils gpiod cloud-utils libpolkit-agent-1-0 libpolkit-gobject-1-0 policykit-1 udhcpc rng-tools
 
 #install docker-ce
 yes "Y" | apt install gnupg apt-transport-https ca-certificates curl software-properties-common

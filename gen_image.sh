@@ -65,6 +65,13 @@ elif [[ "$1" == "edm-g-imx8mp" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mp-edm-g-wb.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mp-edm-g-wb-lvds-vl10112880.dtbo mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mp-edm-g-wb-lvds-vl215192108.dtbo mnt/
+elif [[ "$1" == "edm-g-imx8mm" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mm-edm-g-wb.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mm-edm-g-wb-hdmi2mipi-tc358743.dtbo mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mm-edm-g-wb-ov5640.dtbo mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mm-edm-g-wb-sn65dsi84-vl10112880.dtbo mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mm-edm-g-wb-sn65dsi84-vl15613676.dtbo mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mm-edm-g-wb-sn65dsi84-vl215192108.dtbo mnt/
 elif [[ "$1" == "edm-imx8m" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mq-edm-wizard.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-edm-wizard-mipi-dcss-ili9881c.dtbo mnt/
@@ -74,7 +81,7 @@ elif [[ "$1" == "edm-imx8m" ]]; then
 elif [[ "$1" == "pico-imx8m" ]]; then
   # pi
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/imx8mq-pico-pi.dtb mnt/
-  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-mipi-ili9881c.dtbo mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-ili9881c.dtbo mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-ov5640.dtbo mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-ov5645.dtbo mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm64/boot/dts/freescale/overlays/imx8mq-pico-pi-voicehat.dtbo mnt/

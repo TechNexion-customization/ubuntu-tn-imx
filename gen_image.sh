@@ -125,7 +125,7 @@ sudo umount mnt
 
 
 if [[ "$(echo "$1" | grep "imx8")" ]]; then
-  if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]] || [[ "$1" == "pico-imx8m" ]]; then
+  if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]] || [[ "$1" == "pico-imx8m" ]] || [[ "$1" == "edm-g-imx8mm" ]]; then
     bootloader_offset=33
   elif [[ "$1" == "axon-e-imx8mp" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
     bootloader_offset=32

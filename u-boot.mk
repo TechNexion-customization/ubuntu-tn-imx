@@ -5,27 +5,7 @@
 
 include common.mk
 
-ifeq ($(PLATFORM),pico-imx8mm)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
-else ifeq ($(PLATFORM),axon-e-imx8mp)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
-else ifeq ($(PLATFORM),edm-g-imx8mp)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
-else ifeq ($(PLATFORM),edm-imx8m)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
-else ifeq ($(PLATFORM),pico-imx8m)
-UBOOT_BRANCH := tn-imx_v2020.04_5.4.70_2.3.0-stable
-else ifeq ($(PLATFORM),pico-imx6)
-UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
-else ifeq ($(PLATFORM),edm-imx6)
-UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
-else ifeq ($(PLATFORM),pico-imx6ull)
-UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
-else ifeq ($(PLATFORM),pico-imx7d)
-UBOOT_BRANCH := tn-imx_v2018.03_4.14.98_2.0.0_ga-stable
-endif
-
-UBOOT_COMMIT := `git ls-remote https://github.com/TechNexion/u-boot-tn-imx.git $(UBOOT_BRANCH) | awk '{print $$1}'`
+UBOOT_COMMIT := 83af6b11165732150e9c8d627abc8b16cce8a903
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 
 all: build

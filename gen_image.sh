@@ -121,8 +121,12 @@ cd mnt
 sudo tar zxvf ../output/rootfs.tgz
 cd ${TOP}
 sudo cp -rv ./output/kernel/linux-tn-imx/modules/lib/modules/* mnt/lib/modules/
-sudo umount mnt
 
+if [[ "$1" == "edm-g-imx8mm" ]] || [[ "$1" == "edm-g-imx8mp" ]]; then
+  sudo sed -i '52 s/.*//' ./mnt/usr/share/weston/examples/weston.800.ini
+fi
+
+sudo umount mnt
 
 if [[ "$(echo "$1" | grep "imx8")" ]]; then
   if [[ "$1" == "pico-imx8mm" ]] || [[ "$1" == "edm-imx8m" ]] || [[ "$1" == "pico-imx8m" ]] || [[ "$1" == "edm-g-imx8mm" ]]; then

@@ -5,7 +5,7 @@
 
 include common.mk
 
-UBOOT_COMMIT := 83af6b11165732150e9c8d627abc8b16cce8a903
+UBOOT_COMMIT := a23b6ff402f050a83703ec0b2b97649dbb776c8d
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 
 all: build
@@ -51,6 +51,10 @@ else ifeq ($(PLATFORM),pico-imx6ull)
 	$(eval CC := arm-linux-gnueabi-)
 else ifeq ($(PLATFORM),pico-imx7d)
 	$(eval UBOOT_DEFCONFIG := pico-imx7d_spl_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tep1-imx7d)
+	$(eval UBOOT_DEFCONFIG := tep1-imx7d_spl_defconfig)
 	$(eval ARCH := arm)
 	$(eval CC := arm-linux-gnueabi-)
 endif

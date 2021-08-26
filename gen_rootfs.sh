@@ -233,6 +233,12 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbb.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7.0.5 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+  elif [[ $(echo $1 | grep "imx7") ]]; then
+    sudo cp -a ${TOP}/rootfs_overlay/etc/slim.conf ${TOP}/rootfs/etc/slim.conf
+    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.fluxbox/startup ${TOP}/rootfs/home/ubuntu/.fluxbox/startup
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-standby.jpg ${TOP}/rootfs/etc/xdg/tn-standby.jpg
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/etc/xdg/tn-weston.png
+    sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/usr/share/backgrounds/xfce/xfce-stripes.png
   fi
 
   sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/

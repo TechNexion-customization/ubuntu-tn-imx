@@ -5,8 +5,8 @@
 
 include common.mk
 
-KERNEL_BRANCH := tn-imx_5.4.70_2.3.0-stable
-KERNEL_COMMIT := `git ls-remote https://github.com/TechNexion/linux-tn-imx.git $(KERNEL_BRANCH) | awk '{print $$1}'`
+# tn-imx_5.4.70_2.3.0-next branch
+KERNEL_COMMIT  := d8aecab086de14b6311a63839fd8350ad9b3d844
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
 ifeq ($(PLATFORM),pico-imx8mm)
@@ -34,6 +34,10 @@ KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)
 else ifeq ($(PLATFORM),pico-imx7d)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tep1-imx7d)
 KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)

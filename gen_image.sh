@@ -112,6 +112,8 @@ elif [[ "$1" == "pico-imx6ull" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6ull-pico-pi-qca.dtb mnt/
 elif [[ "$1" == "pico-imx7d" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx7d-pico-pi-qca.dtb mnt/
+elif [[ "$1" == "tep1-imx7d" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx7d-tep1-a2.dtb mnt/
 fi
 
 sudo umount mnt
@@ -140,20 +142,23 @@ else
   sudo dd if=./output/u-boot/u-boot-tn-imx/SPL of="$loop_dev" bs=1k seek=1 conv=sync
   sudo mount /dev/mapper/"$mapper_dev"p1 mnt
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot.img mnt
+  sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot-dtb.img mnt
 
-  sudo touch mnt/uEnv.txt
-  if [[ "$(echo "$1" | grep "imx6$")" ]]; then
-    if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
-      sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
-    else
-      sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
-    fi
-    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
-  else
-    sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
-    sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+  if [[ "$1" != "tep1-imx7d" ]]; then
+    sudo touch mnt/uEnv.txt
+    if [[ "$(echo "$1" | grep "imx6$")" ]]; then
+      if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
+       sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
+     else
+       sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
+     fi
+     sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+   else
+     sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
+     sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+   fi
+   sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
   fi
-  sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
 
   sudo umount mnt
 fi

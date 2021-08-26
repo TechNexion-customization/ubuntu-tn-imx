@@ -41,6 +41,11 @@ else ifeq ($(PLATFORM),tep1-imx7d)
 KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),wandboard-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+
 endif
 
 QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.0

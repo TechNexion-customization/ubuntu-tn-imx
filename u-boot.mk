@@ -57,6 +57,10 @@ else ifeq ($(PLATFORM),tep1-imx7d)
 	$(eval UBOOT_DEFCONFIG := tep1-imx7d_spl_defconfig)
 	$(eval ARCH := arm)
 	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),wandboard-imx6)
+	$(eval UBOOT_DEFCONFIG := wandboard_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
 endif
 
 	$(MAKE) ARCH=arm CROSS_COMPILE=${CC} -C $(UBOOT_DIR)/u-boot-tn-imx $(UBOOT_DEFCONFIG)

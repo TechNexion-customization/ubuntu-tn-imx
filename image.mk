@@ -38,6 +38,8 @@ else ifeq ($(PLATFORM),pico-imx7d)
 	$(eval TARGET := pico-imx7d)
 else ifeq ($(PLATFORM),tep1-imx7d)
 	$(eval TARGET := tep1-imx7d)
+else ifeq ($(PLATFORM),wandboard-imx6)
+	$(eval TARGET := wandboard-imx6)
 endif
 
 	@echo "image generating..."

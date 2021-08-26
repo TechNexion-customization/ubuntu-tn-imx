@@ -114,6 +114,10 @@ elif [[ "$1" == "pico-imx7d" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx7d-pico-pi-qca.dtb mnt/
 elif [[ "$1" == "tep1-imx7d" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx7d-tep1-a2.dtb mnt/
+elif [[ "$1" == "wandboard-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revb1.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revd1.dtb mnt/
 fi
 
 sudo umount mnt

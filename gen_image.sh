@@ -118,6 +118,9 @@ elif [[ "$1" == "wandboard-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revb1.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revd1.dtb mnt/
+elif [[ "$1" == "tek3-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-tek3.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-tek3.dtb mnt/
 fi
 
 sudo umount mnt
@@ -148,13 +151,13 @@ else
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot.img mnt
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot-dtb.img mnt
 
-  if [[ "$1" != "tep1-imx7d" ]]; then
+  if [[ "$1" != "tep1-imx7d" ]] && [[ "$1" != "tek3-imx6" ]] ; then
     sudo touch mnt/uEnv.txt
     if [[ "$(echo "$1" | grep "imx6$")" ]]; then
-      if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
-       sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
-     else
-       sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
+     if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
+      sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
+     elif [[ "$(echo "$1" | grep "pico-imx6")" ]]; then
+      sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
      fi
      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
    else
@@ -163,7 +166,6 @@ else
    fi
    sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
   fi
-
   sudo umount mnt
 fi
 

@@ -5,7 +5,7 @@
 
 include common.mk
 
-UBOOT_COMMIT := 7826e86f0a6dbc739bda3f195eadf6bb9bf915a4
+UBOOT_COMMIT := 1aad7cabb3bada68e2445a86370493a63c1079ec
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 
 all: build
@@ -59,6 +59,10 @@ else ifeq ($(PLATFORM),tep1-imx7d)
 	$(eval CC := arm-linux-gnueabi-)
 else ifeq ($(PLATFORM),wandboard-imx6)
 	$(eval UBOOT_DEFCONFIG := wandboard_defconfig)
+	$(eval ARCH := arm)
+	$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tek3-imx6)
+	$(eval UBOOT_DEFCONFIG := tek-imx6_spl_defconfig)
 	$(eval ARCH := arm)
 	$(eval CC := arm-linux-gnueabi-)
 endif

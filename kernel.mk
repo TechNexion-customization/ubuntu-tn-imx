@@ -6,7 +6,7 @@
 include common.mk
 
 # tn-imx_5.4.70_2.3.0-next branch
-KERNEL_COMMIT  := 347be36237221e6cc2221ac5ea236162109b99ff
+KERNEL_COMMIT  := 440d39d428210a170a12e0a9af33538dcf16ab26
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
 ifeq ($(PLATFORM),pico-imx8mm)
@@ -45,7 +45,10 @@ else ifeq ($(PLATFORM),wandboard-imx6)
 KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)
-
+else ifeq ($(PLATFORM),tek3-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
 endif
 
 QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.0

@@ -39,6 +39,8 @@ else ifeq ($(PLATFORM),tep1-imx7d)
 	$(eval TARGET := tep1-imx7d)
 else ifeq ($(PLATFORM),wandboard-imx6)
 	$(eval TARGET := wandboard-imx6)
+else ifeq ($(PLATFORM),tek3-imx6)
+	$(eval TARGET := tek3-imx6)
 endif
 
 	@echo "build rootfs..."

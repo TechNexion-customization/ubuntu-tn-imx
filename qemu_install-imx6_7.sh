@@ -179,9 +179,9 @@ blueman-applet &
 sleep 3
 sudo rfkill unblock 0
 sudo rfkill unblock 1
-sudo hciconfig hci0 up
 sync
 sudo systemctl start bluetooth
+sudo hciconfig hci0 up
 
 END
 

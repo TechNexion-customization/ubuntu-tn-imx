@@ -49,6 +49,19 @@ else ifeq ($(PLATFORM),tek3-imx6)
 KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tep5-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tc0700-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+else ifeq ($(PLATFORM),tc1010-imx6)
+KERNEL_DEFCONFIG := tn_imx_defconfig
+$(eval ARCH := arm)
+$(eval CC := arm-linux-gnueabi-)
+
 endif
 
 QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.0

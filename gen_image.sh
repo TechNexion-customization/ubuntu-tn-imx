@@ -121,6 +121,17 @@ elif [[ "$1" == "wandboard-imx6" ]]; then
 elif [[ "$1" == "tek3-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-tek3.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-tek3.dtb mnt/
+elif [[ "$1" == "tep5-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-tep5.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-tep5.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-tep5-15inch.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-tep5-15inch.dtb mnt/
+elif [[ "$1" == "tc0700-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-edm1-tc0700-qca.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-edm1-tc0700-qca.dtb mnt/
+elif [[ "$1" == "tc1010-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-edm1-tc1000-qca.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-edm1-tc1000-qca.dtb mnt/
 fi
 
 sudo umount mnt
@@ -151,15 +162,22 @@ else
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot.img mnt
   sudo cp -rv ./output/u-boot/u-boot-tn-imx/u-boot-dtb.img mnt
 
-  if [[ "$1" != "tep1-imx7d" ]] && [[ "$1" != "tek3-imx6" ]] ; then
+  if [[ "$1" != "tep1-imx7d" ]] && [[ "$1" != "tek3-imx6" ]] && [[ "$1" != "tep5-imx6" ]] ; then
     sudo touch mnt/uEnv.txt
     if [[ "$(echo "$1" | grep "imx6$")" ]]; then
      if [[ "$(echo "$1" | grep "edm-imx6")" ]]; then
       sudo sh -c 'echo baseboard=fairy > mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      elif [[ "$(echo "$1" | grep "pico-imx6")" ]]; then
       sudo sh -c 'echo baseboard=nymph > mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+     elif [[ "$(echo "$1" | grep "tc0700-imx6")" ]]; then
+      sudo sh -c 'echo baseboard=tc0700 > mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lvds,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+     elif [[ "$(echo "$1" | grep "tc1010-imx6")" ]]; then
+      sudo sh -c 'echo baseboard=tc1000 > mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lvds,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      fi
-     sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
    else
      sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'

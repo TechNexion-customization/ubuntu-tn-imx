@@ -118,6 +118,9 @@ elif [[ "$1" == "wandboard-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revb1.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-wandboard-revd1.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-wandboard.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-wandboard-revb1.dtb mnt/
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-wandboard-revd1.dtb mnt/
 elif [[ "$1" == "tek3-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-tek3.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-tek3.dtb mnt/

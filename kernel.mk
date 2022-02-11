@@ -6,7 +6,7 @@
 include common.mk
 
 # tn-imx_5.4.70_2.3.0-next branch
-KERNEL_COMMIT  := f98cbade8c9c56a26aafeafc4bbcbee59b289f16
+KERNEL_COMMIT  := a43c5db21a5f17b9f13e94fc7814697fc48b981d
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
 ifeq ($(PLATFORM),pico-imx8mm)
@@ -79,6 +79,8 @@ distclean: clean
 	rm -rf $(wildcard $(KERNEL_DIR/linux-tn-imx))
 
 build: src
+	echo CONFIG_DRM_LEGACY=y >> $(KERNEL_DIR)/linux-tn-imx/arch/arm/configs/$(KERNEL_DEFCONFIG)
+	echo CONFIG_DRM_VIVANTE=y >> $(KERNEL_DIR)/linux-tn-imx/arch/arm/configs/$(KERNEL_DEFCONFIG)
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx $(KERNEL_DEFCONFIG)
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) all
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) dtbs

@@ -16,15 +16,15 @@ gen_pure_rootfs() {
   fi
 
   if [ ! -d rootfs_overlay ] ; then
-    wget -c -t 0 --timeout=60 --waitretry=60 https://download.technexion.com/development_resources/NXP/ubuntu/20.04/proprietary-package/"$proprietary"-focol-proprietary.tar.gz
-    tar zxvf "$proprietary"-focol-proprietary.tar.gz
-    rm ./"$proprietary"-focol-proprietary.tar.gz
+    wget -c -t 0 --timeout=60 --waitretry=60 https://download.technexion.com/development_resources/NXP/ubuntu/22.04/proprietary-package/"$proprietary"-jammy-proprietary.tar.gz
+    tar zxvf "$proprietary"-jammy-proprietary.tar.gz
+    rm ./"$proprietary"-jammy-proprietary.tar.gz
   fi
 
   mkdir rootfs
 
   echo "generate ubuntu rootfs... default version: focal LTS"
-  sudo debootstrap --arch="$ARCH" --keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg --verbose --foreign focal ${TOP}/rootfs
+  sudo debootstrap --arch="$ARCH" --keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg --verbose --foreign jammy ${TOP}/rootfs
   sudo cp /usr/bin/"$QEMU" ${TOP}/rootfs/usr/bin
   sudo LANG=C chroot ${TOP}/rootfs /debootstrap/debootstrap --second-stage
 
@@ -84,27 +84,13 @@ gen_pure_rootfs() {
 
     # fs-overlay
     echo "Start copy VPU relate libraries"
-    # gstreamer1.0
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0/usr/bin ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0/usr/include ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0/usr/libexec ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0/usr/share ${TOP}/rootfs/usr/
 
-    # gstreamer1.0-plugins-base
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-base/usr/bin ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-base/usr/include ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-base/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-base/usr/share ${TOP}/rootfs/usr/
-
-    # gstreamer1.0-plugins-good
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-good/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-good/usr/share ${TOP}/rootfs/usr/
-
-    # gstreamer1.0-plugins-bad
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-bad/usr/include ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-bad/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/gstreamer1.0-plugins-bad/usr/share ${TOP}/rootfs/usr/
+    # VPU part
+    sudo cp -a ${TOP}/rootfs_overlay/gst-imx-plugin/lib/lib* ${TOP}/rootfs/usr/lib/
+    sudo cp -a ${TOP}/rootfs_overlay/gst-imx-plugin/lib/arm-linux-gnueabihf/lib* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/gst-imx-plugin/lib/arm-linux-gnueabihf/pkgconfig/*.pc ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/pkgconfig/
+    sudo cp -a ${TOP}/rootfs_overlay/gst-imx-plugin/lib/arm-linux-gnueabihf/gstreamer-1.0/lib* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/gstreamer-1.0/
+    sudo cp -a ${TOP}/rootfs_overlay/gst-imx-plugin/include/* ${TOP}/rootfs/usr/include
 
     # imx-codec
     sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-codec/usr/include ${TOP}/rootfs/usr/
@@ -124,10 +110,10 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gpu-viv/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
 
     # imx-gst1.0-plugin
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/bin/ ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/include ${TOP}/rootfs/usr/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/share ${TOP}/rootfs/usr/
+    #sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/bin/ ${TOP}/rootfs/usr/
+    #sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/include ${TOP}/rootfs/usr/
+    #sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    #sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-gst1.0-plugin/usr/share ${TOP}/rootfs/usr/
 
     # imx-lib
     sudo cp -a ${TOP}/rootfs_overlay/vpu/imx-lib/usr/include ${TOP}/rootfs/usr/
@@ -216,7 +202,6 @@ gen_pure_rootfs() {
 
     # desktop configuration
     sudo cp -a ${TOP}/rootfs_overlay/etc/X11/xorg.conf ${TOP}/rootfs/etc/X11/xorg.conf
-    sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
   fi
 
   if [[ $(echo $1 | grep "imx6") ]]; then
@@ -233,6 +218,8 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libtbb.so.2 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
     sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libwebp.so.7.0.5 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libcroco-0.6.so.3 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+    sudo cp -a ${TOP}/rootfs_overlay/usr/lib/arm-linux-gnueabihf/libcroco-0.6.so.3.0.1 ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
   elif [[ $(echo $1 | grep "imx7") ]]; then
     sudo cp -a ${TOP}/rootfs_overlay/etc/slim.conf ${TOP}/rootfs/etc/slim.conf
     sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.fluxbox/startup ${TOP}/rootfs/home/ubuntu/.fluxbox/startup
@@ -241,6 +228,7 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/usr/share/backgrounds/xfce/xfce-stripes.png
   fi
 
+  sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
   sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/
 
   sudo LANG=C chroot ${TOP}/rootfs /bin/bash -c "sudo ldconfig"

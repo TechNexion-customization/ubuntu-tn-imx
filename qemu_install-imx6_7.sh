@@ -19,12 +19,13 @@ echo "${COL_GREEN}apt-get server upgrading...${COL_NORMAL}"
 touch /etc/apt/sources.list
 # apt-get source adding
 cat <<END > /etc/apt/sources.list
-deb http://ports.ubuntu.com/ubuntu-ports/ focal main
-deb http://ports.ubuntu.com/ubuntu-ports/ focal universe
-deb http://ports.ubuntu.com/ubuntu-ports/ focal multiverse
-deb http://ports.ubuntu.com/ubuntu-ports/ focal-backports main
-deb http://ports.ubuntu.com/ubuntu-ports/ focal-security main
+deb http://ports.ubuntu.com/ubuntu-ports/ jammy main
+deb http://ports.ubuntu.com/ubuntu-ports/ jammy universe
+deb http://ports.ubuntu.com/ubuntu-ports/ jammy multiverse
+deb http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main
+deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security main
 END
+
 
 # apt-get source update and installation
 yes "Y" | apt-get update
@@ -58,13 +59,14 @@ END
 
 
 # GUI desktop support
-yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils ubuntu-restricted-extras minicom strace firefox
+yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom ubuntu-restricted-extras strace firefox libssl1.1
+
 #cd /usr/share/xsessions
 #cp -a xfce.desktop ubuntu.desktop
 #echo 3 | update-alternatives --config x-session-manager
 #sync
 
-yes "Y" | apt remove xscreensaver gnome-terminal
+yes "Y" | apt remove xfce4-screensaver xscreensaver gnome-terminal
 yes "Y" | apt-get autoremove
 
 
@@ -197,7 +199,7 @@ Exec=tn_init_xfce.sh
 Terminal=false
 END
 
-yes "Y" | apt install --reinstall network-manager
+yes "Y" | apt install --reinstall network-manager-gnome
 
 sudo systemctl daemon-reload
 #sudo systemctl disable getty@tty1.service
@@ -220,8 +222,9 @@ sed -i 's/totalmem\ \/\ 2/totalmem\ \/\ 4/' /usr/bin/init-zram-swapping
 
 
 # vpu requirement
-yes "Y" | apt install libjpeg62 frei0r-plugins libdevil-dev libfmt-dev libcroco3
+yes "Y" | apt install libjpeg62 frei0r-plugins libdevil-dev libfmt-dev
 yes "Y" | apt install --reinstall libgdk-pixbuf2.0-0
+yes "Y" | apt install gstreamer1.0-x gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa
 
 # fluxbox init configuration
 mkdir -p /home/ubuntu/.fluxbox/

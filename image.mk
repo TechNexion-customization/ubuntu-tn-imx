@@ -14,21 +14,7 @@ clean:
 distclean: clean
 
 build-image:
-ifeq ($(PLATFORM),pico-imx8mm)
-	$(eval TARGET := pico-imx8mm)
-else ifeq ($(PLATFORM),edm-g-imx8mm)
-	$(eval TARGET := edm-g-imx8mm)
-else ifeq ($(PLATFORM),axon-e-imx8mp)
-	$(eval TARGET := axon-e-imx8mp)
-else ifeq ($(PLATFORM),edm-g-imx8mp)
-	$(eval TARGET := edm-g-imx8mp)
-else ifeq ($(PLATFORM),edm-g-imx8mm)
-	$(eval TARGET := edm-g-imx8mm)
-else ifeq ($(PLATFORM),edm-imx8m)
-	$(eval TARGET := edm-imx8m)
-else ifeq ($(PLATFORM),pico-imx8m)
-	$(eval TARGET := pico-imx8m)
-else ifeq ($(PLATFORM),pico-imx6)
+ifeq ($(PLATFORM),pico-imx6)
 	$(eval TARGET := pico-imx6)
 else ifeq ($(PLATFORM),edm-imx6)
 	$(eval TARGET := edm-imx6)

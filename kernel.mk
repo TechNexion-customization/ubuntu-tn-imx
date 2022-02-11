@@ -9,19 +9,7 @@ include common.mk
 KERNEL_COMMIT  := a43c5db21a5f17b9f13e94fc7814697fc48b981d
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
-ifeq ($(PLATFORM),pico-imx8mm)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),edm-g-imx8mm)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),axon-e-imx8mp)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),edm-g-imx8mp)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),edm-imx8m)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),pico-imx8m)
-KERNEL_DEFCONFIG := tn_imx8_defconfig
-else ifeq ($(PLATFORM),pico-imx6)
+ifeq ($(PLATFORM),pico-imx6)
 KERNEL_DEFCONFIG := tn_imx_defconfig
 $(eval ARCH := arm)
 $(eval CC := arm-linux-gnueabi-)

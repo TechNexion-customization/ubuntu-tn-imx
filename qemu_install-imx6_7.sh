@@ -59,7 +59,14 @@ END
 
 
 # GUI desktop support
-yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom ubuntu-restricted-extras strace firefox libssl1.1
+yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom  strace firefox libssl1.1
+
+# Install ubuntu-restricted-extras
+echo steam steam/license note '' | sudo debconf-set-selections
+echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections # auto accepted eula agreements
+yes "Y" | apt install ttf-mscorefonts-installer
+echo ubuntu-restricted-extras msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections # auto accepted eula agreements
+yes "Y" | apt install ubuntu-restricted-extras
 
 #cd /usr/share/xsessions
 #cp -a xfce.desktop ubuntu.desktop

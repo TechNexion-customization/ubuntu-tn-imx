@@ -175,7 +175,8 @@ if [ "\$ROOTFS_SIZE" -lt 3 ]; then
   sync
 
   sudo systemctl enable tn_init.service
-  sleep 2
+  sudo depmod
+  sync
 
   sudo reboot
 fi

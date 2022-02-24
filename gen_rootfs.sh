@@ -191,15 +191,6 @@ gen_pure_rootfs() {
 
     echo "done copy GPU libraries copying"
 
-    echo "Start copy tweaked bt libraries copying"
-    sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/bin/* ${TOP}/rootfs/usr/bin/
-    sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
-    echo "done copy tweaked bt libraries copying"
-
-    # tn service
-    sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/tn_init.service ${TOP}/rootfs/etc/systemd/system/
-    sudo cp -a ${TOP}/rootfs_overlay/usr/bin/system_init ${TOP}/rootfs/usr/bin/system_init
-
     # desktop configuration
     sudo cp -a ${TOP}/rootfs_overlay/etc/X11/xorg.conf ${TOP}/rootfs/etc/X11/xorg.conf
   fi
@@ -227,6 +218,15 @@ gen_pure_rootfs() {
     sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/etc/xdg/tn-weston.png
     sudo cp -a ${TOP}/rootfs_overlay/etc/xdg/tn-weston.png ${TOP}/rootfs/usr/share/backgrounds/xfce/xfce-stripes.png
   fi
+
+  echo "Start copy tweaked bt libraries copying"
+  sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/bin/* ${TOP}/rootfs/usr/bin/
+  sudo cp -a ${TOP}/rootfs_overlay/bluez5/usr/lib/* ${TOP}/rootfs/usr/lib/arm-linux-gnueabihf/
+  echo "done copy tweaked bt libraries copying"
+
+  # tn service
+  sudo cp -a ${TOP}/rootfs_overlay/etc/systemd/system/tn_init.service ${TOP}/rootfs/etc/systemd/system/
+  sudo cp -a ${TOP}/rootfs_overlay/usr/bin/system_init ${TOP}/rootfs/usr/bin/system_init
 
   sudo cp -a ${TOP}/rootfs_overlay/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml ${TOP}/rootfs/home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
   sudo cp -rv ${TOP}/rootfs_overlay/lib/firmware/* ${TOP}/rootfs/lib/firmware/

@@ -1,4 +1,4 @@
-Technexion Ubuntu 20.04 LTS Image Builder
+Technexion Ubuntu LTS Image Builder
 ===========================
 
 ![](https://img.shields.io/badge/Release-v22.04LTS_01-green.svg)
@@ -27,9 +27,16 @@ Technexion Ubuntu 20.04 LTS Image Builder
 * Memory size: Up to 512MB
 * WiFi module: PIXI-9377 module
 
+|Platforms|Support OS|
+|---|---|
+|IMX8 series | Ubuntu 20.04 with Weston Desktop |
+|IMX6/IMX7 series | Ubuntu 20.04 with Xfce Desktop <br> Ubuntu 22.04 with Xfce Desktop |
+
+Note that IMX8 series already be merged by Yocto Project, so no longer update here, please visit TechNexion Yocto repository to get latest Ubuntu OS source code with 64-bit platforms.
+
+
 ## User Guide
  --------
-|Platforms|Instruction|
-|---|---|
-|IMX8 series | [Wayland base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx8.md#imx8-platforms-for-ubuntu-2004-with-wayland-framework) |
-|IMX6/IMX7 series |[X11 base](https://github.com/TechNexion-customization/ubuntu-tn-imx/blob/master/README-imx6.md#imx6imx7-platforms-for-ubuntu-2004-with-x11-framework) |
+
+All instruction already move to TechNexion developer WiKi page:
+https://developer.technexion.com/docs/building-ubuntu-2004

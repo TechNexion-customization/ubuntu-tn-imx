@@ -98,6 +98,21 @@ yes "Y" | apt-get autoremove
 #
 #END
 
+# install chromium browser: version 101.0.4951.41
+yes "Y" | apt update
+yes "Y" | apt install libatomic1 libjsoncpp25
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.1.2-1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium_101.0.4951.41-2_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-common_101.0.4951.41-2_armhf.deb
+
+dpkg -i libjpeg62-turbo_2.1.2-1_armhf.deb
+dpkg -i chromium-common_101.0.4951.41-2_armhf.deb
+dpkg -i chromium_101.0.4951.41-2_armhf.deb
+
+rm libjpeg62-turbo_2.1.2-1_armhf.deb
+rm chromium-common_101.0.4951.41-2_armhf.deb
+rm chromium_101.0.4951.41-2_armhf.deb
+
 mkdir -p /home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/
 chown ubuntu:ubuntu /home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/
 chown ubuntu:ubuntu /home/ubuntu/.config/xfce4/xfconf/

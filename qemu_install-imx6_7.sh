@@ -57,9 +57,11 @@ ctl.!default {
 }
 END
 
+# dpkg install latest network-manager and modem-manager for 5gnr module
+dpkg -i /opt/deb/libssl/libssl1.1_1.1.0l-1_deb9u5_armhf.deb
 
 # GUI desktop support
-yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom  strace firefox libssl1.1
+yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom  strace firefox
 
 # Install ubuntu-restricted-extras
 echo steam steam/license note '' | sudo debconf-set-selections

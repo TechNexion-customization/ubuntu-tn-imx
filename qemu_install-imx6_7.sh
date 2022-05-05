@@ -98,21 +98,6 @@ yes "Y" | apt-get autoremove
 #
 #END
 
-# install chromium browser: version 101.0.4951.41
-yes "Y" | apt update
-yes "Y" | apt install libatomic1 libjsoncpp25
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.1.2-1_armhf.deb
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium_101.0.4951.41-2_armhf.deb
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-common_101.0.4951.41-2_armhf.deb
-
-dpkg -i libjpeg62-turbo_2.1.2-1_armhf.deb
-dpkg -i chromium-common_101.0.4951.41-2_armhf.deb
-dpkg -i chromium_101.0.4951.41-2_armhf.deb
-
-rm libjpeg62-turbo_2.1.2-1_armhf.deb
-rm chromium-common_101.0.4951.41-2_armhf.deb
-rm chromium_101.0.4951.41-2_armhf.deb
-
 mkdir -p /home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/
 chown ubuntu:ubuntu /home/ubuntu/.config/xfce4/xfconf/xfce-perchannel-xml/
 chown ubuntu:ubuntu /home/ubuntu/.config/xfce4/xfconf/
@@ -258,6 +243,22 @@ echo "session.screen0.toolbar.visible:                   false" >> /home/ubuntu/
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/gstreamer-1.0 /usr/lib/gstreamer-1.0
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/dri /usr/lib/dri
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/imx-mm /usr/lib/imx-mm
+
+# install chromium browser: version 101.0.4951.41
+yes "Y" | apt update
+yes "Y" | apt install libatomic1 libjsoncpp25 libxslt1.1 libevent-2.1-7 libminizip1 libre2-9
+
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.1.2-1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium_101.0.4951.41-2_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-common_101.0.4951.41-2_armhf.deb
+
+dpkg -i libjpeg62-turbo_2.1.2-1_armhf.deb
+dpkg -i chromium-common_101.0.4951.41-2_armhf.deb
+dpkg -i chromium_101.0.4951.41-2_armhf.deb
+
+rm libjpeg62-turbo_2.1.2-1_armhf.deb
+rm chromium-common_101.0.4951.41-2_armhf.deb
+rm chromium_101.0.4951.41-2_armhf.deb
 
 # remove bug existing applications
 rm -rf /usr/share/applications/xfce-display-settings.desktop

@@ -5,7 +5,7 @@
 
 include common.mk
 
-UBOOT_COMMIT := f117c2aa2c2be6ab134b7b5c5ec5ac3b215117f8
+UBOOT_COMMIT := e2ed2e94f29ae2fa8c118054730e1077211f8520
 UBOOT_ARCHIVE := https://github.com/TechNexion/u-boot-tn-imx/archive/$(UBOOT_COMMIT).tar.gz
 
 all: build

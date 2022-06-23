@@ -176,16 +176,19 @@ else
       sudo sh -c 'echo displayinfo=video=mxcfb0:dev=hdmi,1280x720M@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      elif [[ "$(echo "$1" | grep "tc0700-imx6")" ]]; then
       sudo sh -c 'echo baseboard=tc0700 > mnt/uEnv.txt'
-      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lvds,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=ldb,1024x600@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      elif [[ "$(echo "$1" | grep "tc1010-imx6")" ]]; then
       sudo sh -c 'echo baseboard=tc1000 > mnt/uEnv.txt'
-      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lvds,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=ldb,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      fi
    else
      sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'
      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=lcd,800x480@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
    fi
    sudo sh -c 'echo wifi_module=qca >> mnt/uEnv.txt'
+   sudo sh -c 'echo "display_autodetect=off" >> mnt/uEnv.txt'
+   sudo sh -c 'echo "bootcmd_mmc=run loadimage;run mmcboot;" >> mnt/uEnv.txt'
+   sudo sh -c 'echo "uenvcmd=run bootcmd_mmc;" >> mnt/uEnv.txt'
   fi
   sudo umount mnt
 fi

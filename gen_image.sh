@@ -106,6 +106,7 @@ elif [[ "$1" == "pico-imx6" ]]; then
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-pico-pi-qca.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-pico-nymph-qca.dtb mnt/
 elif [[ "$1" == "edm-imx6" ]]; then
+  sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6qp-edm1-fairy-qca.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6q-edm1-fairy-qca.dtb mnt/
   sudo cp -rv ./output/kernel/linux-tn-imx/arch/arm/boot/dts/imx6dl-edm1-fairy-qca.dtb mnt/
 elif [[ "$1" == "pico-imx6ull" ]]; then

@@ -72,6 +72,7 @@ build: src
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx $(KERNEL_DEFCONFIG)
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) all
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) dtbs
+	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) imx6qp-edm1-fairy-qca.dtb
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) modules
 	$(MAKE) ARCH=${ARCH} CROSS_COMPILE=${CC} -C $(KERNEL_DIR)/linux-tn-imx -j$(CPUS) modules_install INSTALL_MOD_PATH=$(KERNEL_DIR)/linux-tn-imx/modules/
 	cd $(KERNEL_DIR)/qcacld-2.0; \

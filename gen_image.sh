@@ -5,8 +5,8 @@ TOP=${PWD}
 echo "target: --------------> $1"
 
 if [[ "$(echo "$1" | grep "imx8")" ]]; then
-  echo "creating 3.8GiB empty image ..."
-  sudo dd if=/dev/zero of=test.img bs=1M count=3800
+  echo "creating 7.8GiB empty image ..."
+  sudo dd if=/dev/zero of=test.img bs=1M count=7800
 else
   echo "creating 2.9GiB empty image ..."
   sudo dd if=/dev/zero of=test.img bs=1M count=2900

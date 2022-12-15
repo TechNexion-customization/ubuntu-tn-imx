@@ -158,7 +158,7 @@ cat <<END > /usr/bin/tn_init_xfce.sh
 #!/bin/bash
 export DISPLAY=:0.0
 
-MMC_DEV=\$(lsblk | grep mmcblk | head -1 |  awk '{print \$1}')
+MMC_DEV=\$(cat /proc/cmdline | grep -Poi "root=/dev/mmcblk\\d" | cut -d '/' -f 3)
 ROOTFS_SIZE=\$(lsblk | grep "\$MMC_DEV"p2 | awk '{print \$4}' | awk -F. '{print \$1}')
 
 if [ "\$ROOTFS_SIZE" -lt 3 ]; then

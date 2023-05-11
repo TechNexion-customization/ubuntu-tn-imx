@@ -180,7 +180,7 @@ else
       sudo sh -c 'echo displayinfo=video=mxcfb0:dev=ldb,1024x600@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      elif [[ "$(echo "$1" | grep "tc1010-imx6")" ]]; then
       sudo sh -c 'echo baseboard=tc1000 > mnt/uEnv.txt'
-      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=ldb,1024x768@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
+      sudo sh -c 'echo displayinfo=video=mxcfb0:dev=ldb,1280x800@60,if=RGB24,bpp=32 >> mnt/uEnv.txt'
      fi
    else
      sudo sh -c 'echo baseboard=pi > mnt/uEnv.txt'

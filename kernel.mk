@@ -6,7 +6,7 @@
 include common.mk
 
 # tn-imx_5.10.72_2.2.0-next branch
-KERNEL_COMMIT  := 392461bbb7e55be8727df7a57bdbe0a4b4d34e41
+KERNEL_COMMIT  := 6660a7439a5ebcc30c889791f9cd0daae644d1d7
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
 ifeq ($(PLATFORM),pico-imx6)

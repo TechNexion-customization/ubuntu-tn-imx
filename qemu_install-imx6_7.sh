@@ -61,7 +61,7 @@ END
 dpkg -i /opt/deb/libssl/libssl1.1_1.1.0l-1_deb9u5_armhf.deb
 
 # GUI desktop support
-yes "Y" | apt install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom  strace firefox
+apt -y install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-utils minicom strace
 
 # Install ubuntu-restricted-extras
 echo steam steam/license note '' | sudo debconf-set-selections
@@ -243,6 +243,23 @@ echo "session.screen0.toolbar.visible:                   false" >> /home/ubuntu/
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/gstreamer-1.0 /usr/lib/gstreamer-1.0
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/dri /usr/lib/dri
 sudo ln -sn /usr/lib/arm-linux-gnueabihf/imx-mm /usr/lib/imx-mm
+
+# Install firefox
+# Add firefox PPA
+add-apt-repository ppa:mozillateam/ppa -y
+
+# Set apt preferences
+pref_pf="/etc/apt/preferences.d/99-web_browser.pref"
+echo "Package: firefox*" > ${pref_pf}
+echo "Pin: origin ports.ubuntu.com" >> ${pref_pf}
+echo "Pin-Priority: -1" >> ${pref_pf}
+echo "" >> ${pref_pf}
+echo "Package: firefox*" >> ${pref_pf}
+echo "Pin: release o=LP-PPA-mozillateam" >> ${pref_pf}
+echo "Pin-Priority: 700" >> ${pref_pf}
+
+apt -y update
+apt -y install firefox
 
 # install chromium browser: version 101.0.4951.41
 yes "Y" | apt update

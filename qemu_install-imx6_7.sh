@@ -268,20 +268,31 @@ apt -y update
 apt -y install firefox
 
 # install chromium browser: version 101.0.4951.41
-yes "Y" | apt update
-yes "Y" | apt install libatomic1 libjsoncpp25 libxslt1.1 libevent-2.1-7 libminizip1 libre2-9
+apt -y install libatomic1 libjsoncpp25 libxslt1.1 libevent-2.1-7 libminizip1 libre2-9 libxnvctrl0 libdouble-conversion3 libwoff1
 
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.1.2-1_armhf.deb
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium_101.0.4951.41-2_armhf.deb
-wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-common_101.0.4951.41-2_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_2.1.5-2_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libj/libjsoncpp/libjsoncpp24_1.9.4-4_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/libw/libwebp/libwebp6_0.6.1-2.1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-common_112.0.5615.138-1~deb11u1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium_112.0.5615.138-1~deb11u1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-driver_112.0.5615.138-1~deb11u1_armhf.deb
+wget -c -t 0 --timeout=60 --waitretry=60 http://ftp.tw.debian.org/debian/pool/main/c/chromium/chromium-sandbox_112.0.5615.138-1~deb11u1_armhf.deb
 
-dpkg -i libjpeg62-turbo_2.1.2-1_armhf.deb
-dpkg -i chromium-common_101.0.4951.41-2_armhf.deb
-dpkg -i chromium_101.0.4951.41-2_armhf.deb
+dpkg -i libjpeg62-turbo_2.1.5-2_armhf.deb
+dpkg -i libjsoncpp24_1.9.4-4_armhf.deb
+dpkg -i libwebp6_0.6.1-2.1_armhf.deb
+dpkg -i chromium-common_112.0.5615.138-1~deb11u1_armhf.deb
+dpkg -i chromium_112.0.5615.138-1~deb11u1_armhf.deb
+dpkg -i chromium-driver_112.0.5615.138-1~deb11u1_armhf.deb
+dpkg -i chromium-sandbox_112.0.5615.138-1~deb11u1_armhf.deb
 
-rm libjpeg62-turbo_2.1.2-1_armhf.deb
-rm chromium-common_101.0.4951.41-2_armhf.deb
-rm chromium_101.0.4951.41-2_armhf.deb
+rm libjpeg62-turbo_2.1.5-2_armhf.deb
+rm libjsoncpp24_1.9.4-4_armhf.deb
+rm libwebp6_0.6.1-2.1_armhf.deb
+rm chromium-common_112.0.5615.138-1~deb11u1_armhf.deb
+rm chromium_112.0.5615.138-1~deb11u1_armhf.deb
+rm chromium-driver_112.0.5615.138-1~deb11u1_armhf.deb
+rm chromium-sandbox_112.0.5615.138-1~deb11u1_armhf.deb
 
 # remove bug existing applications
 rm -rf /usr/share/applications/xfce-display-settings.desktop

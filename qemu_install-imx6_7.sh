@@ -248,6 +248,12 @@ sudo ln -sn /usr/lib/arm-linux-gnueabihf/imx-mm /usr/lib/imx-mm
 # Add firefox PPA
 add-apt-repository ppa:mozillateam/ppa -y
 
+# Add vivaldi
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 62993C724218647E
+rm -f /etc/apt/trusted.gpg.d/vivaldi.gpg
+apt-key export 4218647E | gpg --dearmour -o /etc/apt/trusted.gpg.d/vivaldi.gpg
+echo "deb http://repo.vivaldi.com/stable/deb/ stable main" > /etc/apt/sources.list.d/vivaldi.list
+
 # Set apt preferences
 pref_pf="/etc/apt/preferences.d/99-web_browser.pref"
 echo "Package: firefox*" > ${pref_pf}

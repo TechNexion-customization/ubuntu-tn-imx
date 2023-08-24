@@ -28,10 +28,10 @@ END
 
 
 # apt-get source update and installation
-yes "Y" | apt-get update
-yes "Y" | apt-get upgrade
-yes "Y" | apt install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils usbutils
-yes "Y" | apt install bash-completion ifupdown resolvconf alsa-utils gpiod cloud-utils udhcpc feh modemmanager software-properties-common bluez blueman
+apt -y update
+apt -y full-upgrade && apt -y autoclean && apt -y autoremove
+apt -y install openssh-server iw wpasupplicant hostapd util-linux procps iproute2 haveged dnsmasq iptables net-tools ppp ntp ntpdate bridge-utils can-utils v4l-utils usbutils
+apt -y install bash-completion ifupdown resolvconf alsa-utils gpiod cloud-utils udhcpc feh modemmanager software-properties-common bluez blueman
 
 
 #install docker-ce
@@ -66,17 +66,17 @@ apt -y install xfce4 slim fluxbox onboard xterm xfce4-screenshooter rfkill alsa-
 # Install ubuntu-restricted-extras
 echo steam steam/license note '' | sudo debconf-set-selections
 echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections # auto accepted eula agreements
-yes "Y" | apt install ttf-mscorefonts-installer
+apt -y install ttf-mscorefonts-installer
 echo ubuntu-restricted-extras msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections # auto accepted eula agreements
-yes "Y" | apt install ubuntu-restricted-extras
+apt -y install ubuntu-restricted-extras
 
 #cd /usr/share/xsessions
 #cp -a xfce.desktop ubuntu.desktop
 #echo 3 | update-alternatives --config x-session-manager
 #sync
 
-yes "Y" | apt remove xfce4-screensaver xscreensaver gnome-terminal
-yes "Y" | apt-get autoremove
+apt -y remove xfce4-screensaver xscreensaver gnome-terminal
+apt -y autoremove
 
 
 # xfce4 auto login
@@ -227,14 +227,14 @@ sed -i 's/sudo\tALL=(ALL:ALL) ALL/sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoer
 
 # zram swap size
 echo "${COL_GREEN}Add swap partition...Default size is one-fourth of total memory${COL_NORMAL}"
-yes "Y" | apt install zram-config
+apt -y install zram-config
 sed -i 's/totalmem\ \/\ 2/totalmem\ \/\ 4/' /usr/bin/init-zram-swapping
 
 
 # vpu requirement
-yes "Y" | apt install libjpeg62 frei0r-plugins libdevil-dev libfmt-dev
-yes "Y" | apt install --reinstall libgdk-pixbuf2.0-0
-yes "Y" | apt install gstreamer1.0-x gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa
+apt -y install libjpeg62 frei0r-plugins libdevil-dev libfmt-dev
+apt -y install --reinstall libgdk-pixbuf2.0-0
+apt -y install gstreamer1.0-x gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-alsa
 
 # fluxbox init configuration
 mkdir -p /home/ubuntu/.fluxbox/

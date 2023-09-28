@@ -46,6 +46,30 @@ gen_pure_rootfs() {
   fi
   sync
 
+  # Install QCA9377 firmware
+  local qca_fw_url="https://oauth2:SbtQ_mC4fvJRA88_9jB7@gitlab.com/technexion-imx/qca_firmware.git"
+  local qca_fw_branch="caf-wlan/CNSS.LEA.NRT_3.0"
+  local fw_src="${TOP}/qca_firmware"
+  rm -rf ${fw_src}
+  git clone ${qca_fw_url} -b ${qca_fw_branch} ${fw_src}
+
+  local fw_dst="${TOP}/rootfs/usr/lib/firmware"
+  for p in qca9377 qca6174; do
+    install -d ${fw_dst}/${p}/
+    for f in bdwlan30 otp30 qwlan30 utf30; do
+      install -m 0755 ${fw_src}/${p}/${f}.bin ${fw_dst}/${p}/
+    done
+
+    install -d ${fw_dst}/wlan/${p}/
+    install -m 0755 ${fw_src}/wlan/${p}/qcom_cfg.ini ${fw_dst}/wlan/${p}/
+  done
+  install -m 0755 ${fw_src}/wlan/cfg.dat ${fw_dst}/wlan/
+
+  install -d ${fw_dst}/qca
+  install -m 0755 ${fw_src}/qca/nvm_tlv_3.2.bin ${fw_dst}/qca
+  install -m 0755 ${fw_src}/qca/rampatch_tlv_3.2.tlv ${fw_dst}/qca
+  unset qca_fw_url qca_fw_branch fw_src fw_dst
+
   if [[ $(echo $1 | grep "imx8") ]]; then
 
     # fs-overlay

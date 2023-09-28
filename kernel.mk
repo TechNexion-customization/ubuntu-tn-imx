@@ -5,8 +5,8 @@
 
 include common.mk
 
-# tn-imx_5.10.72_2.2.0-next branch
-KERNEL_COMMIT  := 6660a7439a5ebcc30c889791f9cd0daae644d1d7
+# tag: tn-kirkstone_5.15.71-2.2.0_20230512
+KERNEL_COMMIT  := 7c37b47490ee2f927fb90664d914f19887bbee58
 KERNEL_ARCHIVE := https://github.com/TechNexion/linux-tn-imx/archive/$(KERNEL_COMMIT).tar.gz
 
 ifeq ($(PLATFORM),pico-imx6)
@@ -52,7 +52,7 @@ $(eval CC := arm-linux-gnueabi-)
 
 endif
 
-QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.0
+QCACLD_BRANCH := tn-CNSS.LEA.NRT_3.1
 QCACLD_COMMIT := `git ls-remote https://github.com/TechNexion/qcacld-2.0.git $(QCACLD_BRANCH) | awk '{print $$1}'`
 QCACLD_ARCHIVE := https://github.com/TechNexion/qcacld-2.0/archive/$(QCACLD_COMMIT).tar.gz
 
